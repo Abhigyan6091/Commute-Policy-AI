@@ -276,53 +276,33 @@ Artifact preserved in [`evaluation/retrieval_comparison.md`](evaluation/retrieva
 
 ---
 
-## ⏱️ 2-Minute Screen Recording Walkthrough
+## 🎬 Demonstration & Verification Walkthrough
 
-Follow this sequence from [`docs/demo_script.md`](docs/demo_script.md) when recording your submission video:
+Follow this operational flow to verify all capabilities end-to-end:
 
-1. **0:00–0:15 (Health Check & Auto-Connect)**:
-   - Navigate to `http://127.0.0.1:8000`. Show `GET /health` returning `{"status": "ok"}`.
-   - Point out that the application auto-connects as **Apex Technologies (Alex · Employee)** on launch.
-2. **0:15–0:35 (Apex Technologies Escort Rule)**:
+1. **System Health & Auto-Authentication**:
+   - Navigate to `http://127.0.0.1:8000`. `GET /health` returns `{"status": "ok"}`.
+   - The application automatically establishes an authenticated corporate session as **Apex Technologies (Alex · Employee)**.
+2. **Company-Specific Policy Query**:
    - Click suggested prompt `[🛡️ Escort Rules]`.
-   - Highlight the answer: escort mandatory after **8:00 PM**.
-3. **0:35–0:55 (Verifiable Citation Card & Latency)**:
-   - Expand the citation card: Show `COMPANY_A_v1.txt`, Section `8`, Page `2`.
-   - Point out the latency badge showing ~42ms response time.
-4. **0:55–1:10 (Abstention on Absent Topic)**:
+   - The assistant answers: security escorts are mandatory on drops departing after **8:00 PM**.
+3. **Verifiable Citation & Low Latency**:
+   - Inspect the citation card: cites `COMPANY_A_v1.txt`, Section `8`, Page `2`.
+   - The latency badge reflects execution in under **50 ms**.
+4. **Graceful Abstention (Policy Silent)**:
    - Click suggested prompt `[🚲 Bicycle (Abstain)]`.
-   - Show `status='not_covered'`, advising the employee to contact the transport desk.
-5. **1:10–1:25 (Tenant Isolation & Contradictory Rules)**:
+   - The assistant returns `status='not_covered'` (*"I could not find a provision covering this question..."*), advising the employee to contact the transport desk.
+5. **Strict Multi-Tenant Isolation**:
    - Click `[🏢 Nova Digital]` in the Persona Switcher.
    - Click `[🛡️ Escort Rules]`.
-   - Notice Nova's rule is after **10:00 PM** (Section 8), proving zero cross-company leakage.
-6. **1:25–1:40 (Atomic Policy Update)**:
+   - Nova's rule specifies escorts after **10:00 PM** (Section 8), demonstrating zero cross-company leakage.
+6. **Zero-Downtime Policy Lifecycle Update**:
    - Click `[⚙️ Apex Admin]`.
    - Click `[📄 1-Click Load Version 2 (Apex 9 PM Escort)]`.
-   - Result confirms Version 2 is `ACTIVE`.
-7. **1:40–1:55 (Verified Version Cutover)**:
+   - Console confirms Version 2 is parsed, indexed, and set to `ACTIVE`.
+7. **Instant Version Cutover**:
    - Switch back to `[🏢 Apex Tech]` and click `[🛡️ Escort Rules]`.
-   - Notice the cutoff has updated to after **9:00 PM** citing `COMPANY_A_v2.txt`.
-8. **1:55–2:00 (Empirical Metrics Summary)**:
-   - Conclude by highlighting: 68/68 tests passed, 26/26 evaluation benchmarks passed, p95 latency = 340.2ms.
-
----
-
-## 🎓 Viva Defense Readiness Guide
-
-Be prepared to answer these core architecture questions during your viva:
-
-- **Q: Why SQLite + ChromaDB instead of an all-in-one database like PostgreSQL + pgvector?**
-  > *Answer: For an enterprise policy engine, operational simplicity and zero network roundtrips beat heavy infrastructure. SQLite with WAL mode provides transactional metadata, atomic pointer swaps, and concurrent readers without background daemons. Chroma gives local persistent vector search with metadata predicates. This single-process design enables our ~340ms p95 latency.*
-
-- **Q: How do you guarantee zero cross-company information leakage?**
-  > *Answer: Identity and authorization live completely outside the model. Company identity is extracted strictly from the cryptographically verified JWT claim. The active policy version is resolved from SQLite by company ID. Chroma search enforces an atomic metadata filter on `company_id` and `policy_version`. Even if a user attempts a prompt injection asking for another company's policy, the retrieval engine returns zero foreign chunks, forcing an immediate abstention.*
-
-- **Q: What was your main design trade-off?**
-  > *Answer: Restricting retrieved context to at most 3 chunks (~2,100 characters). This trade-off prioritizes latency and hallucination prevention over multi-section synthesis. If a policy question spans 4 or more disparate sections, the system safely abstains with a referral to the transport desk, which is far safer in a corporate compliance setting than synthesizing unsupported rules.*
-
-- **Q: How would you make a small live change during the viva?**
-  > *Answer: The codebase is cleanly modularized. For example, to adjust the maximum chunk limit from 3 to 4, update `CHUNK_TOKENS` in `app/config.py`, adjust `top_chunks[:4]` in `app/retrieval.py`, and update the Pydantic schema validator in `app/schemas.py`.*
+   - The escort cutoff immediately reflects **9:00 PM** citing `COMPANY_A_v2.txt`.
 
 ---
 
