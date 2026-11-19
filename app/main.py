@@ -157,6 +157,34 @@ def create_app(settings=None, embedder=None, llm=None):
             'COMPANY_C_employee': make_token('COMPANY_C', 'employee', 'demo-emp-vertex'),
             'COMPANY_A_admin': make_token('COMPANY_A', 'policy_admin', 'demo-admin-apex')
         }
+    @app.get('/api/v1/demo/sample-policy/{version}/{format}', include_in_schema=False)
+    def sample_policy(version: int, format: str, request: Request):
+        policy_dir = Path(__file__).resolve().parent.parent / 'data' / 'policies'
+        filename = f"COMPANY_A_v{version}.{format}"
+        file_path = policy_dir / filename
+        if not file_path.exists():
+            from scripts.fixtures import policy_text
+            content = policy_text('COMPANY_A', updated=(version == 2))
+            return Response(content=content, media_type='text/plain', headers={
+                'Content-Disposition': f'attachment; filename="{filename}"'
+            })
+        media_types = {
+            'txt': 'text/plain',
+            'pdf': 'application/pdf',
+            'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        }
+        return FileResponse(file_path, media_type=media_types.get(format, 'text/plain'), filename=filename)
+    @app.post('/api/v1/admin/demo-load-sample/{version}', response_model=Version, status_code=201)
+    async def demo_load_sample(version: int, request: Request, p: Principal = Depends(admin)):
+        no_tenant_query(request)
+        policy_dir = Path(__file__).resolve().parent.parent / 'data' / 'policies'
+        file_path = policy_dir / f"{p.company_id}_v{version}.txt"
+        if file_path.exists():
+            content = file_path.read_bytes()
+        else:
+            from scripts.fixtures import policy_text
+            content = policy_text(p.company_id, updated=(version == 2)).encode('utf-8')
+        return request.app.state.ingestor.ingest(p, f"{p.company_id}_v{version}.txt", content, request.state.request_id)
     frontend = Path(__file__).resolve().parent.parent/'frontend'
     @app.get('/docs', include_in_schema=False)
     def api_reference():

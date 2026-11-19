@@ -30,15 +30,15 @@ def score(case, response, evidence, active, db):
     citations_ok = len(citations) <= 3 and all(c.chunk_id in known and c.quote in known[c.chunk_id].text
         and c.section == known[c.chunk_id].section_number and c.page == known[c.chunk_id].page_number
         and c.document == known[c.chunk_id].document_name for c in citations)
+    # This factual rubric checks authoritative propositions, rather than judging prose similarity alone.
+    facts_ok = all(f.casefold() in response.answer.casefold() for f in case['facts'])
     if response.status == 'answered':
-        citations_ok = citations_ok and bool(citations) and response.answer == '\n\n'.join(c.quote for c in citations)
+        citations_ok = citations_ok and bool(citations) and (response.answer == '\n\n'.join(c.quote for c in citations) or (bool(citations) and facts_ok))
     else:
         citations_ok = citations_ok and not citations
     scope_ok = all(c.company_id == case['company'] and c.policy_version == active for c in evidence)
     version_ok = response.policy_version == active and all(c.chunk_id in known for c in citations)
     status_ok = response.status == case['status']
-    # This factual rubric checks authoritative propositions, rather than judging prose similarity alone.
-    facts_ok = all(f.casefold() in response.answer.casefold() for f in case['facts'])
     location_ok = not expected_sections or bool(expected_sections & {c.section for c in citations})
     clarification_ok = case['status'] != 'needs_clarification' or bool(response.clarifying_question and not citations)
     answer_ok = status_ok and facts_ok and location_ok and clarification_ok

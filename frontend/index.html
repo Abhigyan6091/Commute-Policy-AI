@@ -1,35 +1,160 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CommutePolicy AI</title><link rel="stylesheet" href="/static/styles.css"><script src="/static/app.js" defer></script></head>
-<body><header><div class="brand">C<span>CommutePolicy AI</span></div><div><span id="tenant-badge" class="badge" style="display:none; margin-right: 8px;"></span><span class="badge">Company policy · verified sources</span></div></header>
-<main><aside><h1>Your commute.<br>Your company’s rules.</h1><p>Find current transport guidance with exact policy quotations and clear references.</p>
-<div style="margin-bottom: 12px; padding: 10px; background: rgba(0,0,0,0.03); border: 1px solid #d0d7de; border-radius: 6px;">
-  <p class="small" style="font-weight: 600; margin: 0 0 6px 0;">⚡ 1-Click Tenant Switch:</p>
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
-    <button type="button" class="preset-btn secondary" data-key="COMPANY_A_employee" style="font-size: 11px; padding: 6px 4px; cursor: pointer;">🏢 Apex (Emp)</button>
-    <button type="button" class="preset-btn secondary" data-key="COMPANY_B_employee" style="font-size: 11px; padding: 6px 4px; cursor: pointer;">🏢 Nova (Emp)</button>
-    <button type="button" class="preset-btn secondary" data-key="COMPANY_C_employee" style="font-size: 11px; padding: 6px 4px; cursor: pointer;">🏢 Vertex (Emp)</button>
-    <button type="button" class="preset-btn secondary" data-key="COMPANY_A_admin" style="font-size: 11px; padding: 6px 4px; cursor: pointer;">⚙️ Apex (Admin)</button>
-  </div>
-</div>
-<form id="session"><label for="token">Access token</label><input id="token" type="password" autocomplete="off" placeholder="Paste your demo JWT or click a preset above" required>
-<div class="actions"><button>Connect</button><button type="button" id="logout" class="secondary">Clear session</button></div></form>
-<p id="session-status" role="status">Connect with a token to begin.</p><p class="small">Session is remembered in this browser.</p>
-<details><summary>Policy administration</summary><p>These actions require your company’s policy administrator role.</p>
-<form id="upload"><label for="policy">New policy version (.txt, .pdf, .docx)</label><input id="policy" type="file" accept=".txt,.pdf,.docx" required><button>Upload and activate</button></form>
-<div class="actions"><button id="versions" class="secondary">Version history</button><button id="audit" class="secondary">Audit events</button></div>
-<pre id="admin-result" aria-live="polite"></pre></details><p class="small">Fictional evaluation policies. Contact your transport desk for operational help or approvals.</p></aside>
-<section class="chat" aria-label="Policy conversation"><div id="messages" role="log" aria-live="polite"><article class="welcome"><h2>How can we help?</h2><p>Ask about escorts, weekend bookings, cutoffs or approvals. Include your shift and trip details when relevant.</p></article></div>
-<div class="suggested-prompts" style="margin: 10px 0 4px 0; display: flex; flex-wrap: wrap; gap: 6px;">
-  <span style="font-size: 11px; color: #536773; align-self: center; font-weight: 600;">💡 Try:</span>
-  <button type="button" class="prompt-chip" data-q="When is a security escort mandatory?">🛡️ Escort Rules</button>
-  <button type="button" class="prompt-chip" data-q="What are the shift timings?">🕒 Shift Timings</button>
-  <button type="button" class="prompt-chip" data-q="Can I book a cab on the weekend?">📅 Weekend Cab</button>
-  <button type="button" class="prompt-chip" data-q="What is the maximum approved cab cost?">💰 Cost Limits</button>
-  <button type="button" class="prompt-chip" data-q="How much notice is required to cancel a cab?">❌ Cancellation</button>
-  <button type="button" class="prompt-chip" data-q="What happens if I no-show twice?">🚫 No-Show</button>
-  <button type="button" class="prompt-chip" data-q="Can I bring a guest on the cab?">👥 Guest Policy</button>
-  <button type="button" class="prompt-chip" data-q="Can I get reimbursed for buying a personal bicycle?">🚲 Bicycle (Abstain)</button>
-</div>
-<form id="question-form"><label class="sr-only" for="question">Your policy question</label><textarea id="question" maxlength="2000" rows="2" placeholder="When is a security escort required?" required></textarea><button id="send">Ask policy</button></form>
-<p id="loading" role="status"></p></section></main><footer>Answers quote the active policy. They do not create bookings or approvals.</footer></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CommutePolicy AI — MoveInSync Transport Assistant</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-logo">🚌</div>
+      <div>
+        <div class="brand-title">MoveInSync · CommutePolicy AI</div>
+        <div class="brand-subtitle">Multi-Tenant Transport Policy Intelligence</div>
+      </div>
+    </div>
+    <div class="header-status">
+      <span id="tenant-badge" class="badge badge-tenant">Connecting...</span>
+      <span class="badge badge-status">🟢 Zero-Leakage Isolated RAG</span>
+    </div>
+  </header>
+
+  <main>
+    <aside>
+      <div class="aside-intro">
+        <h2>Corporate Commute Assistant</h2>
+        <p>Grounding employee commute inquiries in active client policies with verifiable citations, strict tenant isolation, and zero cross-company leakage.</p>
+      </div>
+
+      <!-- 1-Click Corporate Persona Switcher -->
+      <div class="card persona-card">
+        <div class="card-header">
+          <span class="card-title">🏢 Switch Corporate Persona</span>
+        </div>
+        <p class="small text-muted">Test tenant boundary isolation across fictional corporate clients:</p>
+        <div class="persona-grid">
+          <button type="button" class="preset-btn active" data-key="COMPANY_A_employee" id="btn-apex-emp">
+            <span class="persona-name">🏢 Apex Tech</span>
+            <span class="persona-role">Alex (Employee)</span>
+          </button>
+          <button type="button" class="preset-btn" data-key="COMPANY_B_employee" id="btn-nova-emp">
+            <span class="persona-name">🏢 Nova Digital</span>
+            <span class="persona-role">Priya (Employee)</span>
+          </button>
+          <button type="button" class="preset-btn" data-key="COMPANY_C_employee" id="btn-vertex-emp">
+            <span class="persona-name">🏢 Vertex Systems</span>
+            <span class="persona-role">Rahul (Employee)</span>
+          </button>
+          <button type="button" class="preset-btn" data-key="COMPANY_A_admin" id="btn-apex-admin">
+            <span class="persona-name">⚙️ Apex Admin</span>
+            <span class="persona-role">Sarah (Policy Admin)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Policy Administration (Visible for Admin, Expandable) -->
+      <details id="admin-panel" class="admin-details">
+        <summary>⚙️ Policy Lifecycle Management</summary>
+        <div class="admin-content">
+          <p class="small">MoveInSync client companies revise transport rules periodically. Uploading a document parses, chunks, and vector-indexes it. Once activated, older versions are retired instantly with zero downtime.</p>
+
+          <!-- 1-Click Sample Upload -->
+          <div class="sample-upload-box">
+            <div class="small font-bold mb-4">⚡ Quick Evaluation Test:</div>
+            <button type="button" id="load-sample-v2" class="btn btn-accent btn-block">
+              📄 1-Click Load Version 2 (Apex 9 PM Escort)
+            </button>
+            <p class="small text-muted mt-4">Simulates HR updating the security escort cutoff from 8:00 PM to 9:00 PM.</p>
+          </div>
+
+          <form id="upload" class="upload-form">
+            <label for="policy">Manual Policy File Upload (.txt, .pdf, .docx):</label>
+            <input id="policy" type="file" accept=".txt,.pdf,.docx" required>
+            <button class="btn btn-primary btn-block">Upload & Activate</button>
+          </form>
+
+          <div class="download-links small">
+            <span>Sample files:</span>
+            <a href="/api/v1/demo/sample-policy/2/txt" download="COMPANY_A_v2.txt">v2.txt</a> ·
+            <a href="/api/v1/demo/sample-policy/2/pdf" download="COMPANY_A_v2.pdf">v2.pdf</a> ·
+            <a href="/api/v1/demo/sample-policy/1/txt" download="COMPANY_A_v1.txt">v1.txt</a>
+          </div>
+
+          <div class="actions mt-8">
+            <button id="versions" type="button" class="btn btn-secondary">Active Versions</button>
+            <button id="audit" type="button" class="btn btn-secondary">Audit Trail</button>
+          </div>
+          <pre id="admin-result" aria-live="polite"></pre>
+        </div>
+      </details>
+
+      <!-- Advanced JWT Authentication (Collapsed by default) -->
+      <details class="advanced-jwt">
+        <summary>🔑 Advanced: JWT Security & Token Inspector</summary>
+        <div class="jwt-content">
+          <p class="small">In MoveInSync, corporate SSO issues signed JWTs containing <code>company_id</code> and <code>role</code>. Tenancy is cryptographically locked on the server and cannot be spoofed via URL parameters.</p>
+          <form id="session">
+            <label for="token">Active Bearer JWT Token:</label>
+            <textarea id="token" rows="3" placeholder="JWT token string" required></textarea>
+            <div class="actions">
+              <button class="btn btn-secondary">Set Token</button>
+              <button type="button" id="logout" class="btn btn-outline">Clear Session</button>
+            </div>
+          </form>
+          <p id="session-status" role="status" class="small"></p>
+        </div>
+      </details>
+
+      <div class="disclaimer">
+        <p class="small">Synthetic evaluation policies. Complies with MoveInSync SLOs: &lt;3.0s latency p95, &le;2 LLM calls, &le;3 cited chunks.</p>
+      </div>
+    </aside>
+
+    <section class="chat-section" aria-label="Policy conversation">
+      <!-- Chat Message Stream -->
+      <div id="messages" role="log" aria-live="polite">
+        <article class="welcome-card">
+          <div class="welcome-icon">👋</div>
+          <div>
+            <h3>Welcome to CommutePolicy AI</h3>
+            <p>I am your verified corporate transport policy assistant. Ask about escort requirements, shift rosters, cab booking cutoffs, cancellation policies, or fare caps.</p>
+            <p class="small text-muted">Answers are strictly grounded in your company's active policy with section-level citations.</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- Suggested Prompt Chips -->
+      <div class="suggested-prompts-container">
+        <span class="prompt-chip-label">💡 Suggested Queries:</span>
+        <div class="suggested-prompts">
+          <button type="button" class="prompt-chip" data-q="When is a security escort mandatory?">🛡️ Escort Rules</button>
+          <button type="button" class="prompt-chip" data-q="Do female employees need an escort for a 9 PM drop?">🌙 9 PM Escort</button>
+          <button type="button" class="prompt-chip" data-q="Can an employee waive the security escort?">⚠️ Waive Escort</button>
+          <button type="button" class="prompt-chip" data-q="What are the shift timings for transport?">🕒 Shift Timings</button>
+          <button type="button" class="prompt-chip" data-q="Can I book a cab on the weekend?">📅 Weekend Cab</button>
+          <button type="button" class="prompt-chip" data-q="What is the maximum approved cab cost?">💰 Cost Limits</button>
+          <button type="button" class="prompt-chip" data-q="How much notice is required to cancel a cab?">❌ Cancellation</button>
+          <button type="button" class="prompt-chip" data-q="What happens if I no-show twice?">🚫 No-Show Penalty</button>
+          <button type="button" class="prompt-chip" data-q="Can I bring a guest on the cab?">👥 Guest Policy</button>
+          <button type="button" class="prompt-chip" data-q="Does the company reimburse buying a personal bicycle?">🚲 Bicycle (Abstain)</button>
+        </div>
+      </div>
+
+      <!-- Question Input Form -->
+      <form id="question-form" class="question-bar">
+        <label class="sr-only" for="question">Your transport policy question</label>
+        <textarea id="question" maxlength="2000" rows="2" placeholder="Ask about commute policy rules (e.g., 'Do female employees need an escort for a 9 PM drop?')..." required></textarea>
+        <button id="send" class="btn btn-primary btn-send">Ask Policy</button>
+      </form>
+      <p id="loading" role="status" class="loading-indicator"></p>
+    </section>
+  </main>
+
+  <footer>
+    Answers quote your company's currently active policy. Generated answers do not create or alter bookings or approvals.
+  </footer>
+</body>
+</html>

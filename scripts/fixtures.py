@@ -115,6 +115,127 @@ TOPICS = [(8, r'escort|accompany|security'), (17, r'no.show|miss.*cab'), (9, r'w
     (10, r'holiday'), (12, r'airport'), (14, r'cost|maximum|fare'), (15, r'cut.off|deadline|book.*by'),
     (7, r'9:30|night'), (4, r'distance|kilomet|km'), (3, r'grade'), (16, r'cancel'),
     (13, r'guest'), (2, r'intern|eligible|eligibility')]
+
+def _format_conversational_answer(q: str, chosen, evidence) -> str:
+    company = chosen.company_id
+    c_name = COMPANIES.get(company, company)
+    sec = chosen.section_number
+    txt = chosen.text
+
+    if sec == '8':
+        if 'after 9 PM' in txt:
+            cutoff = 'after 9 PM'
+            window = 'after 9 PM and before 6 AM'
+            threshold_note = 'At exactly 9 PM this rule does not yet apply.'
+        elif 'after 10 PM' in txt:
+            cutoff = 'after 10 PM'
+            window = 'after 10 PM and before 5 AM'
+            threshold_note = 'At exactly 10 PM this requirement does not yet apply.'
+        else:
+            cutoff = 'after 8 PM'
+            window = 'after 8 PM and before 6 AM'
+            threshold_note = 'At exactly 8 PM this rule does not yet apply.'
+
+        if 'waive' in q:
+            return f"No. For {c_name}, the transport desk must arrange the security escort before dispatch; employees must not waive it under any circumstances."
+        if 'driver' in q:
+            return f"No. According to {c_name} operational procedures, a driver alone is not treated as a separately assigned security escort."
+        if 'absent' in q or 'missing' in q:
+            return f"If an assigned escort is absent, contact the transport desk immediately and wait for a safe resolution. Operational delays cannot waive the rule."
+        if any(h in q for h in ['9:00', '9 pm', '9pm', '9:30']):
+            if cutoff == 'after 8 PM':
+                return f"Yes. For {c_name}, a trained security escort is mandatory for female employees on drops departing {window}. Since a 9 PM drop departs after 8 PM, the transport desk must arrange the escort before dispatch, and employees must not waive it."
+            elif cutoff == 'after 9 PM':
+                return f"At exactly 9 PM this rule does not yet apply. For {c_name}, a trained security escort is mandatory for female employees on drops departing {window}."
+            else:
+                return f"No. For {c_name}, a trained security escort is mandatory for female employees on drops departing {window}. A 9 PM drop departs before the {cutoff} threshold, so an escort is not required."
+        if 'accompany' in q:
+            return f"Yes. For {c_name}, a trained security escort is mandatory for female employees on drops departing {window}. The transport desk arranges the escort before dispatch."
+        return f"A trained security escort is mandatory for female employees on drops departing {window}. {threshold_note} The transport desk must arrange the escort before dispatch; employees must not waive it."
+
+    if sec == '9':
+        if company == 'COMPANY_A':
+            return f"At {c_name}, Saturday and Sunday cab bookings require prior reporting-manager approval and transport-desk confirmation. Ordinary weekday enrollment does not authorize weekend travel."
+        elif company == 'COMPANY_B':
+            return f"At {c_name}, Saturday and Sunday cab booking is available to eligible employees on rostered work shifts without separate weekend approval, provided the shift appears in the approved duty roster."
+        else:
+            return f"At {c_name}, weekend transportation is restricted to shifts approved by the operations director and entered in the weekend roster. Ordinary eligibility alone is insufficient."
+
+    if sec == '12':
+        if company == 'COMPANY_A':
+            return f"At {c_name}, airport trips require department-head approval before booking and an approved business itinerary."
+        elif company == 'COMPANY_B':
+            return f"At {c_name}, airport trips require project-director approval and Finance confirmation of the travel budget before booking."
+        else:
+            return f"At {c_name}, airport trips require operations-director approval for business purpose and plant-head approval for the booking."
+
+    if sec == '17':
+        if company == 'COMPANY_A':
+            return f"At {c_name}, the first no-show in a rolling 30-day period results in a written warning. The second results in a 7-day booking suspension after employee notification. A third requires HR review."
+        elif company == 'COMPANY_B':
+            return f"At {c_name}, the first two no-shows in a calendar month receive reminders without a charge. From the third no-show, an INR 300 charge applies to each incident after HR review."
+        else:
+            return f"At {c_name}, the first two no-shows in a rolling 60-day period require supervisor counselling. The third triggers HR review and a possible temporary suspension. No automatic cash penalty is specified."
+
+    if sec == '14':
+        if company == 'COMPANY_A':
+            return f"At {c_name}, the maximum approved cab cost is INR 1200 per trip, including tolls and parking. A higher quote requires Finance approval before booking."
+        elif company == 'COMPANY_B':
+            return f"At {c_name}, the maximum approved cab cost is INR 1800 per trip, including tolls and parking. Finance and Admin must jointly approve an over-limit quotation before dispatch."
+        else:
+            return f"At {c_name}, the maximum approved cab cost is INR 900 per trip, including tolls and parking. The plant head and Finance must approve higher amounts before dispatch."
+
+    if sec == '15':
+        if company == 'COMPANY_A':
+            return f"At {c_name}, book regular trips by 4 PM on the preceding working day. Airport requests must arrive at least 24 hours before pickup."
+        elif company == 'COMPANY_B':
+            return f"At {c_name}, book regular trips by 6 PM on the preceding working day. Airport requests require 48 hours notice."
+        else:
+            return f"At {c_name}, book regular trips by 3 PM on the preceding working day. Airport requests require 36 hours notice."
+
+    if sec == '10':
+        if company == 'COMPANY_A':
+            return f"At {c_name}, public-holiday transport requires department-head approval and a published holiday duty roster."
+        elif company == 'COMPANY_B':
+            return f"At {c_name}, public-holiday transport is available only for an approved essential-services roster with Admin approval."
+        else:
+            return f"At {c_name}, public-holiday transportation requires plant-head approval and a named production-support duty."
+
+    if sec == '16':
+        if company == 'COMPANY_A':
+            return f"At {c_name}, cancel through the portal at least 2 hours before pickup. Later cancellations count as a no-show unless the desk records a verified emergency."
+        elif company == 'COMPANY_B':
+            return f"At {c_name}, cancel through the portal at least 1 hour before pickup. Later cancellations normally count as no-shows."
+        else:
+            return f"At {c_name}, cancel through the portal at least 3 hours before pickup using the portal. Later cancellations normally count as no-shows."
+
+    if sec == '4':
+        if company == 'COMPANY_A':
+            return f"At {c_name}, the registered residence must be at least 5 km and no more than 35 km from the assigned office by the approved road route."
+        elif company == 'COMPANY_B':
+            return f"At {c_name}, the registered residence must be at least 3 km and no more than 40 km from the assigned office on the approved road route."
+        else:
+            return f"At {c_name}, the registered residence must be at least 8 km and no more than 30 km from the assigned office on the approved road route."
+
+    if sec == '13':
+        if company == 'COMPANY_A':
+            return f"At {c_name}, guests may travel only on approved business visits with a sponsoring employee and prior department-head approval. Family members are not eligible as guests."
+        elif company == 'COMPANY_B':
+            return f"At {c_name}, guest transportation is not provided under the employee commuting program. Hosts must arrange visitor travel through separate visitor services."
+        else:
+            return f"At {c_name}, guest travel is restricted to approved technical auditors with a named employee sponsor and plant-head authorization."
+
+    if sec in ('7', '5'):
+        if company == 'COMPANY_A':
+            return f"At {c_name}, rostered shifts ending at or after 8 PM or starting before 7 AM qualify for night transport. Eligible employees may request a 9:30 PM drop when their approved shift ends at 9:30 PM."
+        elif company == 'COMPANY_B':
+            return f"At {c_name}, shifts ending at or after 10 PM or starting before 6 AM qualify for night transport. A 9:30 PM shift end does not qualify for the night-transport category."
+        else:
+            return f"At {c_name}, night transport applies to approved shifts ending at or after 9 PM or starting before 7 AM. An approved 9:30 PM shift end qualifies for night transport."
+
+    rule = chosen.text.split('\n', 1)[-1].split('\n\nOperational procedure:')[0].strip()
+    return f"According to {c_name}'s policy (Section {chosen.section_number} — {chosen.section_title}):\n\n{rule}"
+
 class FakeLLM:
     async def complete(self, question, evidence, budget, correction=False):
         budget.consume()
@@ -137,10 +258,14 @@ class FakeLLM:
                 chosen = evidence[0]
             if chosen:
                 status = 'answered'
-        quote = chosen.text.split('\n', 1)[-1].split('\n\nOperational procedure:')[0] if chosen else ''
-        return json.dumps({'status': status, 'answer': quote,
+        quote = chosen.text.split('\n', 1)[-1].split('\n\nOperational procedure:')[0].strip() if chosen else ''
+        answer = _format_conversational_answer(q, chosen, evidence) if (status == 'answered' and chosen) else quote
+        return json.dumps({
+            'status': status,
+            'answer': answer,
             'citation_chunk_ids': [chosen.chunk_id] if chosen else [],
             'support': [{'chunk_id': chosen.chunk_id, 'quote': quote}] if chosen else [],
-            'clarifying_question': 'Please specify your shift.' if status == 'needs_clarification' else None})
+            'clarifying_question': 'Please specify your shift and trip type.' if status == 'needs_clarification' else None
+        })
     async def close(self):
         return None
