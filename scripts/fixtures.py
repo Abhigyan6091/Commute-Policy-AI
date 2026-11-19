@@ -120,6 +120,14 @@ class FakeLLM:
         budget.consume()
         q = question.lower()
         status, chosen = 'not_covered', None
+        if re.search(r'^(hi|hello|hey|help|who are you|good morning)[!?,. ]*$', q):
+            return json.dumps({
+                'status': 'not_covered',
+                'answer': 'Hello! I am your company transportation policy assistant. You can ask me about shift eligibility, security escorts, weekend cab bookings, cost limits, cancellations, or penalties.',
+                'citation_chunk_ids': [],
+                'support': [],
+                'clarifying_question': None
+            })
         if re.search(r'cab tomorrow|am i eligible|can i book a cab[?]?$|my shift', q):
             status = 'needs_clarification'
         elif not re.search(r'bicycle|pet |salary|reveal|ignore|company [abc]|nova|vertex|apex', q):

@@ -20,16 +20,45 @@ async function api(path, options = {}) {
   if (!response.ok) throw new Error(data.detail || data.answer || 'Request failed.');
   return data;
 }
+function decodePayload(jwt) {
+  try {
+    const base64Url = jwt.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    return JSON.parse(decodeURIComponent(escape(atob(base64))));
+  } catch (e) {
+    return null;
+  }
+}
 function setToken(nextToken, label = 'Token loaded') {
   clearSession(); token = nextToken; $('token').value = nextToken;
   try { localStorage.setItem('commutepolicy_token', nextToken); } catch (e) {}
   $('session-status').textContent = `${label}. Verified on every request.`;
+  const payload = decodePayload(nextToken);
+  const badge = $('tenant-badge');
+  if (badge) {
+    if (payload && payload.company_id) {
+      const companies = {
+        'COMPANY_A': '🏢 Apex Technologies',
+        'COMPANY_B': '🏢 Nova Digital',
+        'COMPANY_C': '🏢 Vertex Systems'
+      };
+      const roleName = payload.role === 'policy_admin' ? '⚙️ Admin' : '👤 Employee';
+      badge.textContent = `${companies[payload.company_id] || payload.company_id} · ${roleName}`;
+      badge.style.display = 'inline-flex';
+    } else {
+      badge.style.display = 'none';
+    }
+  }
 }
 $('session').addEventListener('submit', event => {
   event.preventDefault(); const next = $('token').value.trim();
   if (next) setToken(next);
 });
-$('logout').addEventListener('click', clearSession);
+$('logout').addEventListener('click', () => {
+  clearSession();
+  const badge = $('tenant-badge');
+  if (badge) badge.style.display = 'none';
+});
 
 let demoTokens = {};
 async function initPresets() {
@@ -46,6 +75,12 @@ async function initPresets() {
       }
     });
   });
+  document.querySelectorAll('.prompt-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      $('question').value = chip.dataset.q;
+      $('question-form').dispatchEvent(new Event('submit', {cancelable: true, bubbles: true}));
+    });
+  });
   try {
     const saved = localStorage.getItem('commutepolicy_token');
     if (saved) setToken(saved, 'Restored saved session');
@@ -59,6 +94,12 @@ function renderAnswer(data) {
     const ref = node('div', undefined, 'citation');
     ref.append(node('strong', `${c.document} · Section ${c.section || 'unnumbered'} — ${c.section_title}${c.page ? ` · Page ${c.page}` : ''}`), node('blockquote', c.quote));
     article.append(ref);
+  }
+  if (data.timings_ms && data.timings_ms.total) {
+    const t = data.timings_ms;
+    const timeSpan = node('div', undefined, 'timing-badge');
+    timeSpan.textContent = `⚡ Latency: ${t.total.toFixed(1)}ms (Embedding: ${(t.embedding||0).toFixed(1)}ms · Hybrid Retrieval: ${(t.retrieval||0).toFixed(1)}ms)`;
+    article.append(timeSpan);
   }
   article.append(node('p', data.fallback, 'small'), node('p', `Policy version: ${data.policy_version || 'unavailable'} · Reference: ${data.request_id}`, 'small'));
   const actions = node('div', undefined, 'actions');

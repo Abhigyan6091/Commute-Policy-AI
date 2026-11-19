@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CommutePolicy AI</title><link rel="stylesheet" href="/static/styles.css"><script src="/static/app.js" defer></script></head>
-<body><header><div class="brand">C<span>CommutePolicy AI</span></div><span class="badge">Company policy · verified sources</span></header>
+<body><header><div class="brand">C<span>CommutePolicy AI</span></div><div><span id="tenant-badge" class="badge" style="display:none; margin-right: 8px;"></span><span class="badge">Company policy · verified sources</span></div></header>
 <main><aside><h1>Your commute.<br>Your company’s rules.</h1><p>Find current transport guidance with exact policy quotations and clear references.</p>
 <div style="margin-bottom: 12px; padding: 10px; background: rgba(0,0,0,0.03); border: 1px solid #d0d7de; border-radius: 6px;">
   <p class="small" style="font-weight: 600; margin: 0 0 6px 0;">⚡ 1-Click Tenant Switch:</p>
@@ -16,9 +16,20 @@
 <div class="actions"><button>Connect</button><button type="button" id="logout" class="secondary">Clear session</button></div></form>
 <p id="session-status" role="status">Connect with a token to begin.</p><p class="small">Session is remembered in this browser.</p>
 <details><summary>Policy administration</summary><p>These actions require your company’s policy administrator role.</p>
-<form id="upload"><label for="policy">New policy version</label><input id="policy" type="file" accept=".txt,.pdf,.docx" required><button>Upload and activate</button></form>
+<form id="upload"><label for="policy">New policy version (.txt, .pdf, .docx)</label><input id="policy" type="file" accept=".txt,.pdf,.docx" required><button>Upload and activate</button></form>
 <div class="actions"><button id="versions" class="secondary">Version history</button><button id="audit" class="secondary">Audit events</button></div>
 <pre id="admin-result" aria-live="polite"></pre></details><p class="small">Fictional evaluation policies. Contact your transport desk for operational help or approvals.</p></aside>
 <section class="chat" aria-label="Policy conversation"><div id="messages" role="log" aria-live="polite"><article class="welcome"><h2>How can we help?</h2><p>Ask about escorts, weekend bookings, cutoffs or approvals. Include your shift and trip details when relevant.</p></article></div>
+<div class="suggested-prompts" style="margin: 10px 0 4px 0; display: flex; flex-wrap: wrap; gap: 6px;">
+  <span style="font-size: 11px; color: #536773; align-self: center; font-weight: 600;">💡 Try:</span>
+  <button type="button" class="prompt-chip" data-q="When is a security escort mandatory?">🛡️ Escort Rules</button>
+  <button type="button" class="prompt-chip" data-q="What are the shift timings?">🕒 Shift Timings</button>
+  <button type="button" class="prompt-chip" data-q="Can I book a cab on the weekend?">📅 Weekend Cab</button>
+  <button type="button" class="prompt-chip" data-q="What is the maximum approved cab cost?">💰 Cost Limits</button>
+  <button type="button" class="prompt-chip" data-q="How much notice is required to cancel a cab?">❌ Cancellation</button>
+  <button type="button" class="prompt-chip" data-q="What happens if I no-show twice?">🚫 No-Show</button>
+  <button type="button" class="prompt-chip" data-q="Can I bring a guest on the cab?">👥 Guest Policy</button>
+  <button type="button" class="prompt-chip" data-q="Can I get reimbursed for buying a personal bicycle?">🚲 Bicycle (Abstain)</button>
+</div>
 <form id="question-form"><label class="sr-only" for="question">Your policy question</label><textarea id="question" maxlength="2000" rows="2" placeholder="When is a security escort required?" required></textarea><button id="send">Ask policy</button></form>
 <p id="loading" role="status"></p></section></main><footer>Answers quote the active policy. They do not create bookings or approvals.</footer></body></html>
