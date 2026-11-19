@@ -125,6 +125,8 @@ class FakeLLM:
         elif not re.search(r'bicycle|pet |salary|reveal|ignore|company [abc]|nova|vertex|apex', q):
             section = next((s for s, pattern in TOPICS if re.search(pattern, q)), None)
             chosen = next((c for c in evidence if c.section_number == str(section)), None)
+            if not chosen and evidence and not re.search(r'bicycle|pet|salary|foreign', q):
+                chosen = evidence[0]
             if chosen:
                 status = 'answered'
         quote = chosen.text.split('\n', 1)[-1].split('\n\nOperational procedure:')[0] if chosen else ''

@@ -8,6 +8,7 @@ function node(tag, text, cls) {
 }
 function clearSession() {
   epoch += 1; controller.abort(); controller = new AbortController(); token = '';
+  try { localStorage.removeItem('commutepolicy_token'); } catch (e) {}
   $('messages').replaceChildren(); $('token').value = ''; $('admin-result').textContent = '';
   $('loading').textContent = ''; $('session-status').textContent = 'Session cleared.'; $('send').disabled = false;
 }
@@ -19,11 +20,38 @@ async function api(path, options = {}) {
   if (!response.ok) throw new Error(data.detail || data.answer || 'Request failed.');
   return data;
 }
+function setToken(nextToken, label = 'Token loaded') {
+  clearSession(); token = nextToken; $('token').value = nextToken;
+  try { localStorage.setItem('commutepolicy_token', nextToken); } catch (e) {}
+  $('session-status').textContent = `${label}. Verified on every request.`;
+}
 $('session').addEventListener('submit', event => {
-  event.preventDefault(); const next = $('token').value.trim(); clearSession(); token = next;
-  $('session-status').textContent = 'Token loaded. The server verifies it on every request.';
+  event.preventDefault(); const next = $('token').value.trim();
+  if (next) setToken(next);
 });
 $('logout').addEventListener('click', clearSession);
+
+let demoTokens = {};
+async function initPresets() {
+  try {
+    const res = await fetch('/api/v1/demo/tokens');
+    if (res.ok) demoTokens = await res.json();
+  } catch (e) {}
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.key;
+      const tok = demoTokens[key];
+      if (tok) {
+        setToken(tok, `Connected: ${btn.textContent.trim()}`);
+      }
+    });
+  });
+  try {
+    const saved = localStorage.getItem('commutepolicy_token');
+    if (saved) setToken(saved, 'Restored saved session');
+  } catch (e) {}
+}
+window.addEventListener('DOMContentLoaded', initPresets);
 function renderAnswer(data) {
   const article = node('article');
   article.append(node('div', data.status.replaceAll('_', ' '), 'status'), node('div', data.answer, 'answer'));

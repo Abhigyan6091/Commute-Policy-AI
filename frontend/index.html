@@ -3,9 +3,18 @@
 <title>CommutePolicy AI</title><link rel="stylesheet" href="/static/styles.css"><script src="/static/app.js" defer></script></head>
 <body><header><div class="brand">C<span>CommutePolicy AI</span></div><span class="badge">Company policy · verified sources</span></header>
 <main><aside><h1>Your commute.<br>Your company’s rules.</h1><p>Find current transport guidance with exact policy quotations and clear references.</p>
-<form id="session"><label for="token">Access token</label><input id="token" type="password" autocomplete="off" placeholder="Paste your demo JWT" required>
+<div style="margin-bottom: 12px; padding: 10px; background: rgba(0,0,0,0.03); border: 1px solid #d0d7de; border-radius: 6px;">
+  <p class="small" style="font-weight: 600; margin: 0 0 6px 0;">⚡ 1-Click Tenant Switch:</p>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+    <button type="button" class="preset-btn secondary" data-key="COMPANY_A_employee" style="font-size: 11px; padding: 6px 4px; cursor: pointer;">🏢 Apex (Emp)</button>
+    <button type="button" class="preset-btn secondary" data-key="COMPANY_B_employee" style="font-size: 11px; padding: 6px 4px; cursor: pointer;">🏢 Nova (Emp)</button>
+    <button type="button" class="preset-btn secondary" data-key="COMPANY_C_employee" style="font-size: 11px; padding: 6px 4px; cursor: pointer;">🏢 Vertex (Emp)</button>
+    <button type="button" class="preset-btn secondary" data-key="COMPANY_A_admin" style="font-size: 11px; padding: 6px 4px; cursor: pointer;">⚙️ Apex (Admin)</button>
+  </div>
+</div>
+<form id="session"><label for="token">Access token</label><input id="token" type="password" autocomplete="off" placeholder="Paste your demo JWT or click a preset above" required>
 <div class="actions"><button>Connect</button><button type="button" id="logout" class="secondary">Clear session</button></div></form>
-<p id="session-status" role="status">Connect with a token to begin.</p><p class="small">The token stays in this tab’s memory. Reloading clears it.</p>
+<p id="session-status" role="status">Connect with a token to begin.</p><p class="small">Session is remembered in this browser.</p>
 <details><summary>Policy administration</summary><p>These actions require your company’s policy administrator role.</p>
 <form id="upload"><label for="policy">New policy version</label><input id="policy" type="file" accept=".txt,.pdf,.docx" required><button>Upload and activate</button></form>
 <div class="actions"><button id="versions" class="secondary">Version history</button><button id="audit" class="secondary">Audit events</button></div>

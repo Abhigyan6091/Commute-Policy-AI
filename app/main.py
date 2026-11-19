@@ -146,6 +146,17 @@ def create_app(settings=None, embedder=None, llm=None):
         if not request.app.state.db.feedback(p, body):
             raise HTTPException(404, 'Answer not found')
         return {'status': 'recorded', 'request_id': request.state.request_id}
+    @app.get('/api/v1/demo/tokens', include_in_schema=False)
+    def demo_tokens(request: Request):
+        if request.app.state.settings.environment != 'development':
+            raise HTTPException(404, 'Demo tokens disabled')
+        from scripts.create_demo_token import make_token
+        return {
+            'COMPANY_A_employee': make_token('COMPANY_A', 'employee', 'demo-emp-apex'),
+            'COMPANY_B_employee': make_token('COMPANY_B', 'employee', 'demo-emp-nova'),
+            'COMPANY_C_employee': make_token('COMPANY_C', 'employee', 'demo-emp-vertex'),
+            'COMPANY_A_admin': make_token('COMPANY_A', 'policy_admin', 'demo-admin-apex')
+        }
     frontend = Path(__file__).resolve().parent.parent/'frontend'
     @app.get('/docs', include_in_schema=False)
     def api_reference():
