@@ -1,0 +1,77 @@
+const $ = id => document.getElementById(id);
+let token = '', epoch = 0, controller = new AbortController();
+function node(tag, text, cls) {
+  const el = document.createElement(tag);
+  if (text !== undefined) el.textContent = text;
+  if (cls) el.className = cls;
+  return el;
+}
+function clearSession() {
+  epoch += 1; controller.abort(); controller = new AbortController(); token = '';
+  $('messages').replaceChildren(); $('token').value = ''; $('admin-result').textContent = '';
+  $('loading').textContent = ''; $('session-status').textContent = 'Session cleared.'; $('send').disabled = false;
+}
+async function api(path, options = {}) {
+  if (!token) throw new Error('Connect with an access token first.');
+  const response = await fetch(path, {...options, signal: controller.signal,
+    headers: {...options.headers, Authorization: `Bearer ${token}`}});
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.detail || data.answer || 'Request failed.');
+  return data;
+}
+$('session').addEventListener('submit', event => {
+  event.preventDefault(); const next = $('token').value.trim(); clearSession(); token = next;
+  $('session-status').textContent = 'Token loaded. The server verifies it on every request.';
+});
+$('logout').addEventListener('click', clearSession);
+function renderAnswer(data) {
+  const article = node('article');
+  article.append(node('div', data.status.replaceAll('_', ' '), 'status'), node('div', data.answer, 'answer'));
+  for (const c of data.citations) {
+    const ref = node('div', undefined, 'citation');
+    ref.append(node('strong', `${c.document} · Section ${c.section || 'unnumbered'} — ${c.section_title}${c.page ? ` · Page ${c.page}` : ''}`), node('blockquote', c.quote));
+    article.append(ref);
+  }
+  article.append(node('p', data.fallback, 'small'), node('p', `Policy version: ${data.policy_version || 'unavailable'} · Reference: ${data.request_id}`, 'small'));
+  const actions = node('div', undefined, 'actions');
+  for (const [label, helpful] of [['Helpful', true], ['Not helpful', false]]) {
+    const button = node('button', label, 'secondary');
+    button.addEventListener('click', async () => {
+      const current = epoch;
+      try {
+        await api('/api/v1/feedback', {method:'POST', headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({request_id:data.request_id, helpful, reason:''})});
+        if (current === epoch) actions.replaceChildren(node('span', 'Feedback recorded.'));
+      } catch (error) { if (current === epoch) $('loading').textContent = error.message; }
+    }); actions.append(button);
+  }
+  article.append(actions); $('messages').append(article); article.scrollIntoView({block:'nearest'});
+}
+$('question-form').addEventListener('submit', async event => {
+  event.preventDefault(); const question = $('question').value.trim(); if (!question || !token) return;
+  const current = epoch; $('send').disabled = true; $('loading').textContent = 'Checking your current policy…';
+  $('messages').append(node('article', question, 'user')); $('question').value = '';
+  try {
+    const data = await api('/api/v1/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({question})});
+    if (current === epoch) { renderAnswer(data); $('loading').textContent = ''; }
+  } catch (error) { if (current === epoch) $('loading').textContent = error.message; }
+  finally { if (current === epoch) $('send').disabled = false; }
+});
+$('upload').addEventListener('submit', async event => {
+  event.preventDefault(); const current = epoch; const file = $('policy').files[0]; if (!file) return;
+  if (file.size > 10000000) { $('admin-result').textContent = 'File exceeds the 10 MB demo limit.'; return; }
+  const form = new FormData(); form.append('file', file); $('admin-result').textContent = 'Processing policy…';
+  const button = event.target.querySelector('button'); button.disabled = true;
+  try {
+    const data = await api('/api/v1/admin/policies/upload', {method:'POST', body:form});
+    if (current === epoch) { $('admin-result').textContent = JSON.stringify(data, null, 2); $('messages').replaceChildren(node('article', 'New policy activated. Ask again to use the current version.')); }
+  } catch (error) { if (current === epoch) $('admin-result').textContent = error.message; }
+  finally { button.disabled = false; }
+});
+for (const [id, path] of [['versions', '/api/v1/admin/policies/versions'], ['audit', '/api/v1/admin/audit']]) {
+  $(id).addEventListener('click', async () => {
+    const current = epoch;
+    try { const data = await api(path); if (current === epoch) $('admin-result').textContent = JSON.stringify(data, null, 2); }
+    catch (error) { if (current === epoch) $('admin-result').textContent = error.message; }
+  });
+}

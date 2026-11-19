@@ -1,0 +1,14 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+data/runtime/
+data/model-cache/
+evaluation/*results*.jsonl
+evaluation/*.details.json
+evaluation/*.metrics.json
+evaluation/latency_benchmark.json
+evaluation/retrieval_comparison.json

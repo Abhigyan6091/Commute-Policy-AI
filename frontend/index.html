@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CommutePolicy AI</title><link rel="stylesheet" href="/static/styles.css"><script src="/static/app.js" defer></script></head>
+<body><header><div class="brand">C<span>CommutePolicy AI</span></div><span class="badge">Company policy · verified sources</span></header>
+<main><aside><h1>Your commute.<br>Your company’s rules.</h1><p>Find current transport guidance with exact policy quotations and clear references.</p>
+<form id="session"><label for="token">Access token</label><input id="token" type="password" autocomplete="off" placeholder="Paste your demo JWT" required>
+<div class="actions"><button>Connect</button><button type="button" id="logout" class="secondary">Clear session</button></div></form>
+<p id="session-status" role="status">Connect with a token to begin.</p><p class="small">The token stays in this tab’s memory. Reloading clears it.</p>
+<details><summary>Policy administration</summary><p>These actions require your company’s policy administrator role.</p>
+<form id="upload"><label for="policy">New policy version</label><input id="policy" type="file" accept=".txt,.pdf,.docx" required><button>Upload and activate</button></form>
+<div class="actions"><button id="versions" class="secondary">Version history</button><button id="audit" class="secondary">Audit events</button></div>
+<pre id="admin-result" aria-live="polite"></pre></details><p class="small">Fictional evaluation policies. Contact your transport desk for operational help or approvals.</p></aside>
+<section class="chat" aria-label="Policy conversation"><div id="messages" role="log" aria-live="polite"><article class="welcome"><h2>How can we help?</h2><p>Ask about escorts, weekend bookings, cutoffs or approvals. Include your shift and trip details when relevant.</p></article></div>
+<form id="question-form"><label class="sr-only" for="question">Your policy question</label><textarea id="question" maxlength="2000" rows="2" placeholder="When is a security escort required?" required></textarea><button id="send">Ask policy</button></form>
+<p id="loading" role="status"></p></section></main><footer>Answers quote the active policy. They do not create bookings or approvals.</footer></body></html>

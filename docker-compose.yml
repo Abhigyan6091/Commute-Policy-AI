@@ -1,0 +1,20 @@
+services:
+  api:
+    build: .
+    env_file: .env
+    environment:
+      DATA_DIR: /srv/data/runtime
+      HF_HOME: /srv/data/model-cache
+    ports:
+      - '127.0.0.1:8000:8000'
+    volumes:
+      - policy-data:/srv/data/runtime
+      - model-cache:/srv/data/model-cache
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+volumes:
+  policy-data:
+  model-cache:

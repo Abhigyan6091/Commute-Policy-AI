@@ -1,0 +1,94 @@
+FICTIONAL EVALUATION DOCUMENT — Vertex Systems Transport Policy
+Version 1
+
+1. Policy overview
+This fictional policy covers domestic employee commuting at Vertex Systems. It applies from 1 January 2026 until a replacement is activated. The program is designed for approved shift operations and audited business movements.
+
+Operational procedure: The policy owner is the local HR and administration team. A published replacement is authoritative only after successful activation in the policy system. Employees should use the currently active text rather than screenshots of old answers. The program does not promise availability on routes that have not been published. Route notices provide operational schedules and cannot waive approvals, safety duties or cost limits in this policy.
+
+2. Employee eligibility
+Full-time employees and agency contractors specifically listed in the approved shift register may enroll. Interns are excluded without an HR exception. Every traveler must have a validated emergency contact and registered address.
+
+Operational procedure: Submit enrollment through the employee portal using the current employee identifier. HR validates employment status and sends an eligibility confirmation to the desk. Report transfers, changes in employment status and extended leave promptly. A colleague may not lend an enrollment or travel using another employee’s identity. The desk may pause a booking while records are inconsistent and must explain which record needs correction.
+
+3. Grade requirements
+Grades V2 through V7 are eligible for regular shared transport. Grade V1 requires a written HR exception. A higher grade never authorizes a dedicated vehicle or changes the published safety obligations.
+
+Operational procedure: HR maintains the authoritative grade register. A grade change takes effect for transport after the updated record is verified; informal promotion announcements are insufficient. Employees requesting an exception must provide the approval reference rather than changing their declared grade. Grade eligibility does not replace shift, distance or cutoff requirements. The desk records any temporary category assignment and its expiry for subsequent audit.
+
+4. Distance eligibility
+The registered residence must be at least 8 km and no more than 30 km from the assigned office on the approved road route. Exceptions require both HR and operations-director approval and a documented end date.
+
+Operational procedure: The desk calculates distance using the approved road-route tool and stores the route reference with enrollment. Straight-line map distance and personal estimates are not authoritative. An address change requires a new distance check before the first pickup at the new location. Employees should not disclose colleagues’ addresses in support requests. Changes to a safe stop are coordinated centrally and do not independently alter the approved service radius.5. Shift eligibility
+Night transport applies to approved shifts ending at or after 9 PM or starting before 7 AM. Day routes operate only where published. The operations coordinator verifies shift eligibility against the approved duty roster.
+
+Operational procedure: The supervisor must enter a shift change in the scheduling system before the booking deadline. Employees should include their shift reference with any eligibility query. A clock time alone cannot establish personal eligibility without the applicable roster, employment and distance records. The desk resolves discrepancies with the supervisor. Repeated changes made only to obtain transport are reviewed by HR rather than automatically approved by dispatch.
+
+6. Pickup and drop arrangements
+Shared pickups use nominated stops with a 5-minute early-arrival requirement and a maximum 2-minute wait. Approved night drops use safe doorstep access. Notify the desk of blocked roads rather than negotiating a new personal destination.
+
+Operational procedure: Track the assigned vehicle using the portal when available. If the vehicle or driver differs from the booking, verify the change with the desk before boarding. Do not share live location or driver contact details publicly. Route deviations must be reported to dispatch and recorded with the operational reason. Drivers may decline unsafe stops; the desk must coordinate a safe alternative and communicate it to affected travelers.
+
+7. Night transportation
+An approved 9:30 PM shift end qualifies for night transport. Employees must book the drop against their approved shift record. Changing the drop to a personal destination requires a separately approved exception.
+
+Operational procedure: Employees must verify the vehicle identifier and driver identity before boarding. A delayed employee should contact dispatch rather than request unsafe driving or informal roadside pickup. The desk tracks completion of night drops and escalates an unconfirmed arrival. Report a route or safety concern immediately. The approved booking record, actual dispatch time and incident reference are retained for review by authorized operations personnel.
+
+8. Security escorts
+A trained security escort is mandatory for female employees on drops departing after 9 PM and before 6 AM. At exactly 9 PM this rule does not yet apply. A trip requiring an escort must not depart without one.
+
+Operational procedure: The desk verifies escort assignment against the actual departure time and the applicable safety rule. A driver alone is not treated as a separately assigned security escort. If an assigned escort is absent, contact the desk and wait for a safe resolution. Operational delays cannot waive the rule. Report escort conduct concerns through the same incident channel; the duty lead coordinates a safe replacement and records the action.9. Weekend transportation
+Weekend transportation is restricted to shifts approved by the operations director and entered in the weekend roster. Ordinary eligibility alone is insufficient. Unrostered Saturday or Sunday personal travel is not permitted.
+
+Operational procedure: Weekend requests must identify the date, shift, office and business purpose. Capacity remains subject to route planning and applicable cutoffs. A weekend service does not authorize personal errands, shopping or recreation. Keep the approval or roster reference available for dispatch verification. If work is cancelled, cancel the booking through the normal procedure. A holiday overlapping a weekend follows the separate holiday rule rather than whichever rule appears more convenient.
+
+10. Holiday transportation
+Public-holiday transportation requires plant-head approval and a named production-support duty. A general weekend approval is insufficient when a public holiday overlaps a weekend. Admin validates the holiday calendar before dispatch.
+
+Operational procedure: Admin publishes the office holiday calendar and identifies the duty roster used for dispatch. An employee should confirm the local office calendar when sites observe different holidays. A manager’s general work message is not a substitute for the required holiday authorization. Submit corrections to Admin before the booking deadline. Safety requirements, employee eligibility, cost restrictions and cancellation obligations continue to apply to every approved holiday trip.
+
+11. Ad-hoc requests
+Ad-hoc requests require operations-director approval before dispatch and must relate to a documented business need. Provide travel timing, site, route and cost centre. The desk may combine authorized requests where safe.
+
+Operational procedure: Use the portal request form and attach the written approval reference before dispatch. The desk records route feasibility, estimated fare and the requesting cost centre. Approval of a business purpose does not override a fare cap or required security escort. Notify the approver of material itinerary changes. The final booking record must identify the actual traveler and destination rather than a generic team label that prevents accountability.
+
+12. Airport transportation
+Airport trips require operations-director approval for business purpose and plant-head approval for the booking. Business flight details must be attached. Personal airport transfers are excluded even if a vehicle is otherwise available.
+
+Operational procedure: Provide flight number, terminal, pickup address and scheduled departure or arrival time. The desk allows a practical airport reporting buffer but cannot guarantee airline check-in. Notify dispatch of flight changes as soon as known. Additional waiting charges count toward the applicable cost limit. An airport approval applies only to the submitted itinerary; a changed business itinerary must be reconfirmed by the authorized approver before dispatch.13. Guest transportation
+Guest travel is restricted to approved technical auditors with a named employee sponsor and plant-head authorization. Other visitors must use the separate visitor-services process. Guests are never automatically added to employee shift vehicles.
+
+Operational procedure: The sponsoring employee coordinates visitor identity verification through the approved visitor channel. Do not put passport numbers or other sensitive identity documents in ordinary chat questions. The desk checks the authorized travel category before assigning a seat. Where this policy excludes a visitor category, a host must use the separate visitor process rather than relabel the visitor as an employee. Approved passengers remain subject to vehicle safety capacity.
+
+14. Cost restrictions
+The maximum approved cab cost is INR 900 per trip, including tolls and parking. The plant head and Finance must approve higher amounts before dispatch. An approved business purpose does not by itself waive the cap.
+
+Operational procedure: The desk obtains a fare estimate before confirming the booking and records all required financial approval references. Include expected tolls, parking and waiting charges in the estimate. Report an unexpected overrun promptly for review; post-trip review is not a promise of reimbursement. Employees must not pay an unofficial cash supplement to bypass the approved process. Finance reconciles the final vendor invoice against the booking and authorized exceptions.
+
+15. Booking cut-off timings
+Book regular trips by 3 PM on the preceding working day. Airport requests require 36 hours notice. Late requests require the ad-hoc approval in section 11 and remain subject to safety and vehicle availability.
+
+Operational procedure: All cutoff times refer to the assigned office’s local time. A preceding working day excludes days marked closed in the office calendar. Submit early when a long holiday closure affects planning. The portal timestamp is the record of submission, and a draft saved without submission is not a booking. Late requests remain unconfirmed until the required approval and capacity checks are complete; do not assume a vehicle will arrive.
+
+16. Cancellation procedures
+Cancel at least 3 hours before pickup using the portal. Later cancellations normally count as no-shows. The desk may exclude documented operator failures or medical emergencies after reviewing the evidence with the shift supervisor.
+
+Operational procedure: A portal cancellation should produce a confirmation reference. If the portal is unavailable, notify the desk using the published contact and retain the incident reference. Do not rely on a message to a colleague or driver as the only cancellation record. The desk reviews disputed late cancellations using timestamps and the reported circumstances. Cancelled work shifts do not automatically cancel employee-created ad-hoc bookings, so check each reservation.17. No-show penalties
+The first two no-shows in a rolling 60-day period require supervisor counselling. The third triggers HR review and a possible temporary suspension decided after employee response. No automatic cash penalty is specified.
+
+Operational procedure: A no-show means the employee did not board the confirmed service and did not cancel within the permitted window. The desk records dispatch and wait timestamps before assigning the incident. Employees may dispute an incorrect record through the transport desk with available evidence. HR reviews contested penalties and any applicable exception. A driver’s failure to reach the approved pickup location must be investigated rather than treated as an employee absence.
+
+18. Approval hierarchy
+Operations directors approve weekend shifts, ad-hoc trips and airport business purpose. Plant heads approve airport bookings, holiday duty and technical-auditor guest travel. Finance participates in cost exceptions; the desk validates dispatch.
+
+Operational procedure: Approvals must be attributable, dated and specific to the trip or valid exception period. The desk records the approval reference and checks that the approver holds the required role. Delegation must be documented by HR or Admin; a copied colleague cannot create approval authority. If multiple approvals are required, obtain all of them before dispatch. Conflicting approvals are escalated to the policy owner, with no assumption that a later informal message supersedes policy.
+
+19. Exceptions
+Eligibility and distance exceptions require HR and operations-director approval with an expiry date. Urgent safety incidents go directly to the duty desk. Written emergency justification is due by the next working day.
+
+Operational procedure: An exception records the reason, scope, approvers, start date and expiry date. It cannot override an immediate vehicle safety requirement or legal road restriction. The desk checks the exception on each affected booking and removes expired exceptions from operational use. Employees should request renewal before expiry. A previous approved exception for a different traveler, location or month does not establish a continuing entitlement for a new request.
+
+20. Transport desk and escalation
+Contact commute@vertex.example or extension 6303 for support. Escalate unresolved incidents to the shift transport supervisor, then the operations director. In imminent danger use local emergency services first.
+
+Operational procedure: Provide the booking reference, relevant trip time and a concise description when contacting support. Do not send passwords, authentication tokens or unrelated personal documents. The desk acknowledges the incident and routes it to the duty owner; urgent safety reports take priority over routine booking changes. Keep the incident reference for follow-up. Feedback on an assistant answer helps review content but does not amend policy or create a booking approval.

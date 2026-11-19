@@ -1,0 +1,11 @@
+# Evaluation protocol
+
+Dataset: 26 fixed cases in evaluation/dataset.py with authored expected status, source section and factual propositions. Generate JSONL with `python -m evaluation.dataset`. Cases reflect synthetic RULES, not observed model outputs. Independent human verification remains pending.
+
+Hit@1/Hit@3: fraction of covered questions with an expected section at rank 1/within 3. Recall@3: expected sections retrieved divided by expected sections. MRR: reciprocal rank of the first relevant section, averaged over covered cases. Answer correctness combines required facts, expected status, source location and clarification behavior; it is not a full semantic proof. Citation correctness validates source text, document, section, page and original membership. Abstention accuracy measures correct not-covered responses on deliberately absent cases. Cross-company isolation is the fraction of traps with no foreign retrieved/cited evidence; an unnecessary refusal and a correct own-company answer may both be isolated, while expected-status scoring distinguishes them. Policy-version correctness checks current pointer and source IDs for update cases. Overall pass requires all checks and at least one retrieval hit for covered cases.
+
+Result rows have exactly id, input, expected, actual, pass and notes. actual stores the serialized real response; detailed checks and metrics are sidecars. An unsuccessful run still writes reports and exits nonzero. No empty placeholder result file is presented as actual evaluation.
+
+Review real answers manually for semantic relevance, complete conditions, mandatory/advisory distinctions, negation and time boundaries. Mark any answer misleading even when all expected words appear. Include omitted exceptions as failures. Keep reviewed judgments separate from machine results with reviewer/date/rationale. Do not treat the fake keyword provider as evidence of LLM prompt-injection resistance or paraphrase understanding.
+
+Both dense and hybrid comparisons use fresh databases, identical cases and the same v1→v2 sequence. Report retrieval metrics, latency, context characters and per-case regressions. Differences in generated text require review. Fake timings are simulated. Real benchmarks should be repeated under documented hardware/network/concurrency conditions; the sample p95 cannot establish a permanent SLA.
