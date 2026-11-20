@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="/static/styles.css?v=5">
   <script src="/static/app.js?v=5" defer></script>
 </head>
+
 <body>
   <header>
     <div class="brand">
@@ -29,7 +31,8 @@
     <aside>
       <div class="aside-intro">
         <h2>Policy Console</h2>
-        <p>Grounding employee commute inquiries in active corporate policies with cryptographic tenant isolation and verifiable section citations.</p>
+        <p>Grounding employee commute inquiries in active corporate policies with cryptographic tenant isolation and
+          verifiable section citations.</p>
       </div>
 
       <!-- Corporate Persona Selector -->
@@ -37,7 +40,8 @@
         <div class="card-header">
           <span class="card-title">Corporate Client Session</span>
         </div>
-        <p class="small text-muted">Select an authenticated corporate identity to verify cross-company policy scoping:</p>
+        <p class="small text-muted">Select an authenticated corporate identity to verify cross-company policy scoping:
+        </p>
         <div class="persona-grid">
           <button type="button" class="preset-btn active" data-key="COMPANY_A_employee" id="btn-apex-emp">
             <span class="persona-name">Apex Technologies</span>
@@ -62,7 +66,8 @@
       <details id="admin-panel" class="admin-details">
         <summary>Policy Lifecycle & Activation</summary>
         <div class="admin-content">
-          <p class="small">Upload approved policy documentation (.txt, .pdf, .docx). Document is parsed, vectorized, and atomically activated across the tenant with zero system downtime.</p>
+          <p class="small">Upload approved policy documentation (.txt, .pdf, .docx). Document is parsed, vectorized, and
+            atomically activated across the tenant with zero system downtime.</p>
 
           <div id="admin-auth-status" class="role-badge warning">
             Restricted: Employee session active. Policy uploads and activation require Administrator role. Select <strong>Apex Administration (Sarah)</strong> above to manage policies.
@@ -73,7 +78,8 @@
             <button type="button" id="load-sample-v2" class="btn btn-accent btn-block">
               Activate Policy Version 2 (Apex 9 PM Escort)
             </button>
-            <p class="small text-muted mt-4">Simulates HR updating the security escort requirement cutoff from 8:00 PM to 9:00 PM.</p>
+            <p class="small text-muted mt-4">Simulates HR updating the security escort requirement cutoff from 8:00 PM
+              to 9:00 PM.</p>
           </div>
 
           <form id="upload" class="upload-form">
@@ -101,7 +107,8 @@
       <details class="advanced-jwt">
         <summary>Authentication & Token Inspector</summary>
         <div class="jwt-content">
-          <p class="small">Tenancy is cryptographically anchored to signed JWT claims (company_id, role). Query parameter tenant overrides are rejected with HTTP 422 to prevent IDOR attacks.</p>
+          <p class="small">Tenancy is cryptographically anchored to signed JWT claims (company_id, role). Query
+            parameter tenant overrides are rejected with HTTP 422 to prevent IDOR attacks.</p>
           <form id="session">
             <label for="token">Active Bearer Token:</label>
             <textarea id="token" rows="3" placeholder="Paste custom signed JWT for testing" required></textarea>
@@ -115,7 +122,8 @@
       </details>
 
       <div class="disclaimer">
-        <p class="small">MoveInSync Case Study B Platform. Governed by strict operational limits: &lt;3.0s latency p95, &le;2 LLM calls, &le;3 cited chunks.</p>
+        <p class="small">MoveInSync Case Study B Platform. Governed by strict operational limits: &lt;3.0s latency p95,
+          &le;2 LLM calls, &le;3 cited chunks.</p>
       </div>
     </aside>
 
@@ -127,8 +135,10 @@
             <h3>Transport Policy Desk</h3>
             <span class="welcome-tag">Active Version Scoped</span>
           </div>
-          <p>Query transport guidelines, night-shift travel eligibility, security escort thresholds, weekend booking approvals, fare caps, and cancellation rules.</p>
-          <p class="small text-muted">All responses are verified against current active policy text with exact section and page citations.</p>
+          <p>Query transport guidelines, night-shift travel eligibility, security escort thresholds, weekend booking
+            approvals, fare caps, and cancellation rules.</p>
+          <p class="small text-muted">All responses are verified against current active policy text with exact section
+            and page citations.</p>
         </article>
       </div>
 
@@ -136,23 +146,33 @@
       <div class="suggested-prompts-container">
         <span class="prompt-chip-label">Test Inquiries:</span>
         <div class="suggested-prompts">
-          <button type="button" class="prompt-chip" data-q="When is a security escort mandatory?">Escort Requirements</button>
-          <button type="button" class="prompt-chip" data-q="Do female employees need an escort for a 9 PM drop?">9 PM Escort Rule</button>
-          <button type="button" class="prompt-chip" data-q="Can an employee waive the security escort?">Escort Waiver Policy</button>
-          <button type="button" class="prompt-chip" data-q="What are the shift timings for transport?">Shift Eligibility</button>
+          <button type="button" class="prompt-chip" data-q="When is a security escort mandatory?">Escort
+            Requirements</button>
+          <button type="button" class="prompt-chip" data-q="Do female employees need an escort for a 9 PM drop?">9 PM
+            Escort Rule</button>
+          <button type="button" class="prompt-chip" data-q="Can an employee waive the security escort?">Escort Waiver
+            Policy</button>
+          <button type="button" class="prompt-chip" data-q="What are the shift timings for transport?">Shift
+            Eligibility</button>
           <button type="button" class="prompt-chip" data-q="Can I book a cab on the weekend?">Weekend Transport</button>
-          <button type="button" class="prompt-chip" data-q="What is the maximum approved cab cost?">Trip Cost Limits</button>
-          <button type="button" class="prompt-chip" data-q="How much notice is required to cancel a cab?">Cancellation Notice</button>
+          <button type="button" class="prompt-chip" data-q="What is the maximum approved cab cost?">Trip Cost
+            Limits</button>
+          <button type="button" class="prompt-chip" data-q="How much notice is required to cancel a cab?">Cancellation
+            Notice</button>
           <button type="button" class="prompt-chip" data-q="What happens if I no-show twice?">No-Show Penalties</button>
-          <button type="button" class="prompt-chip" data-q="Can I bring a guest on the cab?">Guest Travel Policy</button>
-          <button type="button" class="prompt-chip" data-q="Does the company reimburse buying a personal bicycle?">Bicycle Reimbursement (Abstain)</button>
+          <button type="button" class="prompt-chip" data-q="Can I bring a guest on the cab?">Guest Travel
+            Policy</button>
+          <button type="button" class="prompt-chip"
+            data-q="Does the company reimburse buying a personal bicycle?">Bicycle Reimbursement (Abstain)</button>
         </div>
       </div>
 
       <!-- Input Form -->
       <form id="question-form" class="question-bar">
         <label class="sr-only" for="question">Transport policy inquiry</label>
-        <textarea id="question" maxlength="2000" rows="2" placeholder="Enter policy inquiry (e.g., 'Do female employees need an escort for a 9 PM drop?')..." required></textarea>
+        <textarea id="question" maxlength="2000" rows="2"
+          placeholder="Enter policy inquiry (e.g., 'Do female employees need an escort for a 9 PM drop?')..."
+          required></textarea>
         <button id="send" class="btn btn-primary btn-send">Submit Inquiry</button>
       </form>
       <p id="loading" role="status" class="loading-indicator"></p>
@@ -160,7 +180,9 @@
   </main>
 
   <footer>
-    Authoritative corporate transport policies. Guidance does not create, modify, or substitute official dispatch bookings or manager approvals.
+    Authoritative corporate transport policies. Guidance does not create, modify, or substitute official dispatch
+    bookings or manager approvals.
   </footer>
 </body>
+
 </html>
