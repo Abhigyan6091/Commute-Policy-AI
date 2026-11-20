@@ -61,9 +61,9 @@ function setToken(nextToken, label = 'Connected') {
 
   if (payload && payload.company_id) {
     const companies = {
-      'COMPANY_A': '🏢 Apex Technologies',
-      'COMPANY_B': '🏢 Nova Digital',
-      'COMPANY_C': '🏢 Vertex Systems'
+      'COMPANY_A': 'Apex Technologies',
+      'COMPANY_B': 'Nova Digital',
+      'COMPANY_C': 'Vertex Systems'
     };
     const cName = companies[payload.company_id] || payload.company_id;
     const roleName = payload.role === 'policy_admin' ? 'Sarah (Admin)' : (
@@ -99,18 +99,18 @@ function renderAnswer(data) {
   // Header status pill
   const header = node('div', undefined, 'msg-header');
   const statusLabels = {
-    'answered': '🟢 Grounded Policy Answer',
-    'not_covered': '⚪ Policy Silent (Abstained)',
-    'needs_clarification': '🟡 Needs Clarification',
-    'temporary_error': '🔴 Temporary Error'
+    'answered': 'POLICY COVERED',
+    'not_covered': 'POLICY SILENT (ABSTAINED)',
+    'needs_clarification': 'CLARIFICATION REQUIRED',
+    'temporary_error': 'SYSTEM ERROR'
   };
-  const pill = node('span', statusLabels[data.status] || data.status.replaceAll('_', ' '), `status-pill ${data.status}`);
+  const pill = node('span', statusLabels[data.status] || data.status.replaceAll('_', ' ').toUpperCase(), `status-pill ${data.status}`);
   header.append(pill);
   container.append(header);
 
   // Direct AI Answer
   const answerText = data.clarifying_question
-    ? `${data.answer}\n\n👉 Clarification Needed: ${data.clarifying_question}`
+    ? `${data.answer}\n\nClarification Required: ${data.clarifying_question}`
     : data.answer;
   const answer = node('div', answerText, 'msg-answer');
   container.append(answer);
@@ -120,14 +120,14 @@ function renderAnswer(data) {
     for (const c of data.citations) {
       const card = node('div', undefined, 'citation-card');
       const cardHeader = node('div', undefined, 'citation-header');
-      const titleSpan = node('span', `📖 ${c.document} · Section ${c.section || 'unnumbered'} — ${c.section_title}${c.page ? ` · Page ${c.page}` : ''}`);
+      const titleSpan = node('span', `SOURCE: ${c.document} · Section ${c.section || 'N/A'} — ${c.section_title}${c.page ? ` · Page ${c.page}` : ''}`);
 
-      const copyBtn = node('button', '📋 Copy Quote', 'btn-copy');
+      const copyBtn = node('button', 'Copy Ref', 'btn-copy');
       copyBtn.type = 'button';
       copyBtn.addEventListener('click', () => {
         navigator.clipboard.writeText(c.quote || '').then(() => {
-          copyBtn.textContent = '✅ Copied!';
-          setTimeout(() => { copyBtn.textContent = '📋 Copy Quote'; }, 1500);
+          copyBtn.textContent = 'Copied';
+          setTimeout(() => { copyBtn.textContent = 'Copy Ref'; }, 1500);
         });
       });
 
@@ -142,10 +142,11 @@ function renderAnswer(data) {
   const meta = node('div', undefined, 'meta-bar');
   if (data.timings_ms && data.timings_ms.total) {
     const t = data.timings_ms;
-    const parts = [`⚡ ${t.total.toFixed(1)}ms total`];
+    const parts = [`Latency: ${t.total.toFixed(1)}ms`];
+    if (t.llm !== undefined) parts.push(`LLM: ${t.llm.toFixed(1)}ms`);
     if (t.dense !== undefined) parts.push(`Chroma: ${t.dense.toFixed(1)}ms`);
     if (t.hybrid !== undefined) parts.push(`RRF: ${t.hybrid.toFixed(1)}ms`);
-    if (data.policy_version) parts.push(`Policy: ${data.policy_version.substring(0, 8)}`);
+    if (data.policy_version) parts.push(`Version: ${data.policy_version.substring(0, 8)}`);
     meta.append(node('span', parts.join(' · '), 'timing-badge'));
   }
   container.append(meta);
@@ -180,7 +181,7 @@ async function askQuestion(text) {
     $('loading').textContent = '';
     const errorCard = node('div', undefined, 'msg-assistant');
     errorCard.append(
-      node('div', '⚠️ Request Error', 'status-pill temporary_error'),
+      node('div', 'REQUEST ERROR', 'status-pill temporary_error'),
       node('div', err.message, 'msg-answer')
     );
     messages.append(errorCard);
@@ -210,8 +211,7 @@ async function initApp() {
         // Add notification in chat
         const notice = node('div', undefined, 'welcome-card');
         notice.append(
-          node('div', '🏢', 'welcome-icon'),
-          node('div', `Switched session to ${btn.querySelector('.persona-name').textContent.trim()} (${btn.querySelector('.persona-role').textContent.trim()}). Verified via signed corporate JWT claims.`)
+          node('div', `Session switched to ${btn.querySelector('.persona-name').textContent.trim()} (${btn.querySelector('.persona-role').textContent.trim()}). Authenticated via signed corporate JWT claims.`)
         );
         $('messages').append(notice);
         $('messages').scrollTop = $('messages').scrollHeight;
@@ -232,22 +232,22 @@ async function initApp() {
   if (sampleBtn) {
     sampleBtn.addEventListener('click', async () => {
       sampleBtn.disabled = true;
-      sampleBtn.textContent = '⏳ Ingesting & Indexing Version 2...';
+      sampleBtn.textContent = 'Ingesting & activating Version 2...';
       try {
         const res = await api('/api/v1/admin/demo-load-sample/2', { method: 'POST' });
-        $('admin-result').textContent = `✅ Successfully uploaded & activated Version 2!\n\nVersion ID: ${res.id}\nStatus: ${res.status}\nDocument: ${res.document_name}\nCreated: ${res.created_at}\n\nNote: Escort cutoff is now 9:00 PM (was 8:00 PM in v1).`;
+        $('admin-result').textContent = `[SUCCESS] Version 2 activated.\n\nVersion ID: ${res.id}\nStatus: ${res.status}\nDocument: ${res.document_name}\nCreated: ${res.created_at}\n\nNote: Escort cutoff is now 9:00 PM (was 8:00 PM in v1).`;
         const alertMsg = node('div', undefined, 'msg-assistant');
         alertMsg.append(
-          node('div', '📢 Policy Version Update Activated', 'status-pill answered'),
+          node('div', 'POLICY UPDATE ACTIVATED', 'status-pill answered'),
           node('div', 'Version 2 has been activated for Apex Technologies. The female security escort requirement cutoff is now 9:00 PM (previously 8:00 PM). Ask "When is a security escort mandatory?" to verify the live update!')
         );
         $('messages').append(alertMsg);
         $('messages').scrollTop = $('messages').scrollHeight;
       } catch (err) {
-        $('admin-result').textContent = `❌ Activation failed: ${err.message}`;
+        $('admin-result').textContent = `[ERROR] Activation failed: ${err.message}`;
       } finally {
         sampleBtn.disabled = false;
-        sampleBtn.textContent = '📄 1-Click Load Version 2 (Apex 9 PM Escort)';
+        sampleBtn.textContent = 'Activate Policy Version 2 (Apex 9 PM Escort)';
       }
     });
   }
@@ -309,9 +309,9 @@ $('upload').addEventListener('submit', async event => {
       method: 'POST',
       body: form
     });
-    $('admin-result').textContent = `✅ Successfully activated:\n${JSON.stringify(res, null, 2)}`;
+    $('admin-result').textContent = `[SUCCESS] Policy document activated:\n${JSON.stringify(res, null, 2)}`;
   } catch (err) {
-    $('admin-result').textContent = `❌ Upload failed: ${err.message}`;
+    $('admin-result').textContent = `[ERROR] Upload failed: ${err.message}`;
   }
 });
 
