@@ -66,7 +66,8 @@ class HostedLLM:
                 json={'model': self.settings.llm_model, 'messages': messages, 'temperature': 0,
                       'max_tokens': self.settings.llm_max_tokens, 'response_format': {'type': 'json_object'}}) as response:
                 if response.status_code != 200:
-                    raise ProviderError('Provider unavailable')
+                    err_body = (await response.aread()).decode('utf-8', errors='replace')
+                    raise ProviderError(f'Provider unavailable (HTTP {response.status_code}): {err_body}')
                 payload = bytearray()
                 async for part in response.aiter_bytes():
                     payload.extend(part)

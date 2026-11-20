@@ -48,12 +48,14 @@ async def smoke_test():
     chunk = Chunk(
         chunk_id="test_chunk_001",
         company_id="COMPANY_A",
+        policy_id="policy_001",
         policy_version="v1",
         document_name="Apex_Transport_Policy_v1.txt",
         section_number="4.2",
         section_title="Security Escorts for Late Night Travel",
         page_number=3,
-        text="Section 4.2 Security Escorts: For trips scheduled after 20:00 (8:00 PM), female employees travelling alone or as the last drop are assigned a dedicated security escort."
+        text="Section 4.2 Security Escorts: For trips scheduled after 20:00 (8:00 PM), female employees travelling alone or as the last drop are assigned a dedicated security escort.",
+        content_hash="hash_001_abc"
     )
 
     question = "Do female employees need an escort for an 8:30 PM drop?"
