@@ -267,6 +267,35 @@ async function initApp() {
     });
   }
 
+  // 1-Click Reset to Version 1 button
+  const resetBtn = $('load-sample-v1');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', async () => {
+      resetBtn.disabled = true;
+      resetBtn.textContent = 'Resetting to Version 1...';
+      try {
+        const res = await api('/api/v1/admin/demo-load-sample/1', { method: 'POST' });
+        $('admin-result').textContent = `[SUCCESS] Reset to Version 1 complete.\n\nVersion ID: ${res.id}\nStatus: ${res.status}\nDocument: ${res.document_name}\nCreated: ${res.created_at}\n\nNote: Escort cutoff is reset to 8:00 PM baseline.`;
+        const alertMsg = node('div', undefined, 'msg-assistant');
+        alertMsg.append(
+          node('div', 'POLICY RESET TO BASELINE (v1)', 'status-pill answered'),
+          node('div', 'Version 1 baseline has been restored for Apex Technologies. The escort cutoff is back to 8:00 PM. Ask "When is a security escort mandatory?" to verify.')
+        );
+        $('messages').append(alertMsg);
+        $('messages').scrollTop = $('messages').scrollHeight;
+      } catch (err) {
+        if (err.message && err.message.includes('Policy administrator role required')) {
+          $('admin-result').textContent = `[ACCESS DENIED] Policy administrator role required.\n\nSwitch to "Apex Administration (Sarah · Policy Admin)" above to reset baseline policies.`;
+        } else {
+          $('admin-result').textContent = `[ERROR] Reset failed: ${err.message}`;
+        }
+      } finally {
+        resetBtn.disabled = false;
+        resetBtn.textContent = 'Reset to Baseline Version 1 (Apex 8 PM Escort)';
+      }
+    });
+  }
+
   // Restore saved session or auto-connect default Apex Employee
   try {
     const saved = localStorage.getItem('commutepolicy_token');

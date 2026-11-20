@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MoveInSync — Commute Policy Desk</title>
-  <link rel="stylesheet" href="/static/styles.css?v=5">
-  <script src="/static/app.js?v=5" defer></script>
+  <link rel="stylesheet" href="/static/styles.css?v=6">
+  <script src="/static/app.js?v=6" defer></script>
 </head>
 
 <body>
@@ -74,12 +74,14 @@
           </div>
 
           <div class="sample-upload-box">
-            <div class="small font-bold mb-4">Version Cutover Test:</div>
+            <div class="small font-bold mb-4">Version Cutover & Reset Controls:</div>
             <button type="button" id="load-sample-v2" class="btn btn-accent btn-block">
               Activate Policy Version 2 (Apex 9 PM Escort)
             </button>
-            <p class="small text-muted mt-4">Simulates HR updating the security escort requirement cutoff from 8:00 PM
-              to 9:00 PM.</p>
+            <button type="button" id="load-sample-v1" class="btn btn-secondary btn-block mt-4">
+              Reset to Baseline Version 1 (Apex 8 PM Escort)
+            </button>
+            <p class="small text-muted mt-4">Simulates HR updating the security escort requirement cutoff from 8:00 PM to 9:00 PM, or resetting back to baseline.</p>
           </div>
 
           <form id="upload" class="upload-form">
