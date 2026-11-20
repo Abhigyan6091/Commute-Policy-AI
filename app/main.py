@@ -6,7 +6,7 @@ from pathlib import Path
 from uuid import uuid4
 from fastapi import Depends, FastAPI, File, HTTPException, Query, Request, UploadFile
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from filelock import FileLock
 from starlette.concurrency import run_in_threadpool
