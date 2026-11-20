@@ -1,53 +1,33 @@
 {
   "first_request_after_start": {
-    "latency_ms": 341.8457999941893,
+    "latency_ms": 899.1706999950111,
     "success": true,
     "http_status": 200,
     "timings_ms": {
-      "embedding": 18.502699997043237,
-      "retrieval": 8.053300000028685,
+      "embedding": 12.34309998108074,
+      "retrieval": 7.15180003317073,
       "context_chars": 2146.0,
-      "llm": 0.19269998301751912,
-      "total": 43.462300003739074
+      "llm": 585.3348000091501,
+      "total": 632.1022000047378
     },
     "llm_calls": 1,
     "cached": false
   },
-  "requests": 30,
-  "successful": 30,
-  "failed": 0,
-  "p50_ms": 317.42340000346303,
-  "p95_ms": 340.18239998840727,
-  "p99_ms": 360.0195999897551,
-  "average_ms": 319.0714166654895,
-  "successful_p95_ms": 340.18239998840727,
+  "requests": 10,
+  "successful": 5,
+  "failed": 5,
+  "p50_ms": 392.99329998902977,
+  "p95_ms": 842.4345999956131,
+  "p99_ms": 842.4345999956131,
+  "average_ms": 569.9028900067788,
+  "successful_p95_ms": 842.4345999956131,
   "average_stages_ms": {
-    "embedding": 14.241169998422265,
-    "retrieval": 11.194796668132767,
-    "llm": 0.3643833294821282,
-    "total": 55.059046667884104
+    "embedding": 15.14469999819994,
+    "retrieval": 10.39081999915652,
+    "llm": 288.1314899888821,
+    "total": 338.4098900016397
   },
   "calls_per_question": [
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
     1,
     1,
     1,
@@ -61,429 +41,149 @@
   ],
   "rows": [
     {
-      "latency_ms": 295.9635999868624,
+      "latency_ms": 726.5481000067666,
       "success": true,
       "http_status": 200,
       "timings_ms": {
-        "embedding": 11.042800004361197,
-        "retrieval": 9.480099979555234,
+        "embedding": 12.378600018564612,
+        "retrieval": 8.072800002992153,
         "context_chars": 2146.0,
-        "llm": 0.3648999845609069,
-        "total": 40.820399997755885
+        "llm": 461.1869999789633,
+        "total": 507.91849999222904
       },
       "llm_calls": 1,
       "cached": false
     },
     {
-      "latency_ms": 318.16100000287406,
+      "latency_ms": 784.892299969215,
       "success": true,
       "http_status": 200,
       "timings_ms": {
-        "embedding": 13.029699999606237,
-        "retrieval": 9.982100018532947,
+        "embedding": 17.46659999480471,
+        "retrieval": 10.51649998407811,
         "context_chars": 2136.0,
-        "llm": 0.2570000069681555,
-        "total": 46.30269997869618
+        "llm": 489.3628000281751,
+        "total": 545.5516999936663
       },
       "llm_calls": 1,
       "cached": false
     },
     {
-      "latency_ms": 312.0827999955509,
+      "latency_ms": 842.4345999956131,
       "success": true,
       "http_status": 200,
       "timings_ms": {
-        "embedding": 12.989699986064807,
-        "retrieval": 11.636000010184944,
+        "embedding": 18.192099989391863,
+        "retrieval": 8.546400000341237,
         "context_chars": 2249.0,
-        "llm": 0.367600005120039,
-        "total": 59.358300000894815
+        "llm": 550.9431999525987,
+        "total": 601.6339000198059
       },
       "llm_calls": 1,
       "cached": false
     },
     {
-      "latency_ms": 310.8313000120688,
+      "latency_ms": 769.8814000468701,
       "success": true,
       "http_status": 200,
       "timings_ms": {
-        "embedding": 13.114700006553903,
-        "retrieval": 10.94470001407899,
+        "embedding": 17.45619997382164,
+        "retrieval": 11.718399997334927,
         "context_chars": 2195.0,
-        "llm": 0.30369998421519995,
-        "total": 51.17459999746643
+        "llm": 478.34420000435784,
+        "total": 534.731199964881
       },
       "llm_calls": 1,
       "cached": false
     },
     {
-      "latency_ms": 332.08289998583496,
+      "latency_ms": 665.732100023888,
       "success": true,
       "http_status": 200,
       "timings_ms": {
-        "embedding": 14.794799993978813,
-        "retrieval": 12.620000023161992,
+        "embedding": 12.280100025236607,
+        "retrieval": 5.5451999651268125,
         "context_chars": 2193.0,
-        "llm": 0.45200000749900937,
-        "total": 63.616400002501905
+        "llm": 417.1088999719359,
+        "total": 459.8803000408225
       },
       "llm_calls": 1,
       "cached": false
     },
     {
-      "latency_ms": 313.8549999857787,
-      "success": true,
-      "http_status": 200,
+      "latency_ms": 381.34629995329306,
+      "success": false,
+      "http_status": 503,
       "timings_ms": {
-        "embedding": 13.828499999362975,
-        "retrieval": 11.405800003558397,
+        "embedding": 21.240800037048757,
+        "retrieval": 13.958899944555014,
         "context_chars": 2159.0,
-        "llm": 0.4202999989502132,
-        "total": 51.680500007933006
+        "llm": 79.95990000199527,
+        "total": 138.1429000175558
       },
       "llm_calls": 1,
       "cached": false
     },
     {
-      "latency_ms": 327.95160001842305,
-      "success": true,
-      "http_status": 200,
+      "latency_ms": 391.92990004085004,
+      "success": false,
+      "http_status": 503,
       "timings_ms": {
-        "embedding": 15.714800014393404,
-        "retrieval": 12.800699973013252,
+        "embedding": 14.935699990019202,
+        "retrieval": 13.073400012217462,
         "context_chars": 2280.0,
-        "llm": 0.4422000201884657,
-        "total": 59.559599991189316
+        "llm": 109.29290001513436,
+        "total": 161.47140000248328
       },
       "llm_calls": 1,
       "cached": false
     },
     {
-      "latency_ms": 314.73559999722056,
-      "success": true,
-      "http_status": 200,
+      "latency_ms": 392.99329998902977,
+      "success": false,
+      "http_status": 503,
       "timings_ms": {
-        "embedding": 17.02800000202842,
-        "retrieval": 15.915899974061176,
+        "embedding": 14.382399967871606,
+        "retrieval": 13.14490003278479,
         "context_chars": 2146.0,
-        "llm": 0.33310000435449183,
-        "total": 63.67669999599457
+        "llm": 97.99549996387213,
+        "total": 150.01029998529702
       },
       "llm_calls": 1,
       "cached": false
     },
     {
-      "latency_ms": 337.3591999989003,
-      "success": true,
-      "http_status": 200,
+      "latency_ms": 365.4491000343114,
+      "success": false,
+      "http_status": 503,
       "timings_ms": {
-        "embedding": 17.484899988630787,
-        "retrieval": 13.947700033895671,
+        "embedding": 11.387899983674288,
+        "retrieval": 7.021600031293929,
         "context_chars": 2136.0,
-        "llm": 0.42929998016916215,
-        "total": 66.24889999511652
+        "llm": 99.62379996431991,
+        "total": 139.99240001430735
       },
       "llm_calls": 1,
       "cached": false
     },
     {
-      "latency_ms": 330.7384999934584,
-      "success": true,
-      "http_status": 200,
+      "latency_ms": 377.8218000079505,
+      "success": false,
+      "http_status": 503,
       "timings_ms": {
-        "embedding": 15.554299985524267,
-        "retrieval": 13.982800039229915,
+        "embedding": 11.726600001566112,
+        "retrieval": 12.310100020840764,
         "context_chars": 2249.0,
-        "llm": 0.4957999917678535,
-        "total": 71.32889999775216
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 338.42379998532124,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 22.502200008602813,
-        "retrieval": 10.236099973553792,
-        "context_chars": 2195.0,
-        "llm": 0.3395999956410378,
-        "total": 59.75060001946986
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 300.2120000019204,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 13.81299999775365,
-        "retrieval": 11.067200015531853,
-        "context_chars": 2193.0,
-        "llm": 0.37090000114403665,
-        "total": 52.070400008233264
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 305.6417999905534,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 14.489399996818975,
-        "retrieval": 11.837600002763793,
-        "context_chars": 2159.0,
-        "llm": 0.33179999445565045,
-        "total": 52.514700015308335
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 319.99240000732243,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 11.191099998541176,
-        "retrieval": 8.444100007181987,
-        "context_chars": 2280.0,
-        "llm": 0.21999998716637492,
-        "total": 45.79360000207089
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 331.9656999956351,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 15.5881000100635,
-        "retrieval": 13.74789999681525,
-        "context_chars": 2146.0,
-        "llm": 0.3688999859150499,
-        "total": 64.40579998889007
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 360.0195999897551,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 15.084800019394606,
-        "retrieval": 9.364599973196164,
-        "context_chars": 2136.0,
-        "llm": 0.27000001864507794,
-        "total": 50.905799987958744
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 297.45090001961216,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 11.54630002565682,
-        "retrieval": 9.788599971216172,
-        "context_chars": 2249.0,
-        "llm": 0.25389998336322606,
-        "total": 43.637000024318695
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 329.18150001205504,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 12.647700001252815,
-        "retrieval": 10.490699991350994,
-        "context_chars": 2195.0,
-        "llm": 0.3924999909941107,
-        "total": 58.04750000243075
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 301.8027000071015,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 7.834199990611523,
-        "retrieval": 6.234800006495789,
-        "context_chars": 2193.0,
-        "llm": 0.1942999952007085,
-        "total": 35.64550000010058
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 317.42340000346303,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 16.957800020463765,
-        "retrieval": 10.076899983687326,
-        "context_chars": 2159.0,
-        "llm": 0.3273999900557101,
-        "total": 53.91270000836812
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 320.3094000054989,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 14.543700002832338,
-        "retrieval": 12.667399976635352,
-        "context_chars": 2280.0,
-        "llm": 0.6613000005017966,
-        "total": 62.18480001552962
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 310.3684000088833,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 15.542699984507635,
-        "retrieval": 11.706299992511049,
-        "context_chars": 2146.0,
-        "llm": 0.27699998463504016,
-        "total": 53.68909999378957
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 329.52270001987927,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 13.348799984669313,
-        "retrieval": 12.854700005846098,
-        "context_chars": 2136.0,
-        "llm": 0.49199999193660915,
-        "total": 63.063800014788285
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 337.5350999995135,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 16.28869998967275,
-        "retrieval": 14.538600022206083,
-        "context_chars": 2249.0,
-        "llm": 0.5212999822106212,
-        "total": 67.80039999284782
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 316.2704999849666,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 16.614699998172,
-        "retrieval": 13.044400024227798,
-        "context_chars": 2195.0,
-        "llm": 0.43769998592324555,
-        "total": 64.91519999690354
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 340.18239998840727,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 15.161799994530156,
-        "retrieval": 11.613799986662343,
-        "context_chars": 2193.0,
-        "llm": 0.4991000168956816,
-        "total": 64.28869999945164
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 308.1726999953389,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 12.794699985533953,
-        "retrieval": 12.091200012946501,
-        "context_chars": 2159.0,
-        "llm": 0.34050000249408185,
-        "total": 48.00809998414479
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 302.1250999881886,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 11.625199986156076,
-        "retrieval": 6.793500011553988,
-        "context_chars": 2280.0,
-        "llm": 0.2426000137347728,
-        "total": 50.64010000205599
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 330.67100000334904,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 17.32429998810403,
-        "retrieval": 11.126199999125674,
-        "context_chars": 2146.0,
-        "llm": 0.3030999796465039,
-        "total": 54.745900008128956
-      },
-      "llm_calls": 1,
-      "cached": false
-    },
-    {
-      "latency_ms": 281.1098999809474,
-      "success": true,
-      "http_status": 200,
-      "timings_ms": {
-        "embedding": 7.753699988825247,
-        "retrieval": 5.40350002120249,
-        "context_chars": 2136.0,
-        "llm": 0.22170000011101365,
-        "total": 31.98470000643283
+        "llm": 97.49670000746846,
+        "total": 144.76629998534918
       },
       "llm_calls": 1,
       "cached": false
     }
   ],
-  "target_met_in_this_sample": true,
+  "target_met_in_this_sample": false,
   "execution": "LIVE HTTP; operator must confirm configured real provider and disable cache",
-  "conditions": "Windows 11, Python 3.13, Localhost HTTP, CPU MiniLM-L6-v2, Cache TTL 0",
+  "conditions": "Local laptop CPU, Groq qwen/qwen3.8-27b, all-MiniLM-L6-v2, cache_ttl=0",
   "platform": "Windows-11-10.0.26300-SP0",
   "concurrency": 1,
   "cold_start_note": "Embedding startup is outside request timing. Restart before measuring first request; first request is not a model-download cold-start measurement."
