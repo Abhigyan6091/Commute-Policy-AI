@@ -87,6 +87,17 @@ function setToken(nextToken, label = 'Connected') {
         adminPanel.open = true;
       }
     }
+
+    const authStatus = $('admin-auth-status');
+    if (authStatus) {
+      if (payload.role === 'policy_admin') {
+        authStatus.className = 'role-badge success';
+        authStatus.innerHTML = '<strong>Administrator Authorized:</strong> Policy upload, version staging, and audit controls are unlocked.';
+      } else {
+        authStatus.className = 'role-badge warning';
+        authStatus.innerHTML = '<strong>Employee Session Active:</strong> Policy uploads and lifecycle controls are restricted to administrators. Switch to <strong>Apex Administration (Sarah)</strong> above to manage policies.';
+      }
+    }
   } else {
     badge.textContent = 'Unknown Session';
     $('session-status').textContent = 'Custom token connected.';
@@ -244,7 +255,11 @@ async function initApp() {
         $('messages').append(alertMsg);
         $('messages').scrollTop = $('messages').scrollHeight;
       } catch (err) {
-        $('admin-result').textContent = `[ERROR] Activation failed: ${err.message}`;
+        if (err.message && err.message.includes('Policy administrator role required')) {
+          $('admin-result').textContent = `[ACCESS DENIED] Policy administrator role required.\n\nYou are currently authenticated as an Employee. Uploading, activating policies, and viewing audit trails require the "policy_admin" role.\n\nQuick Fix: Click "Apex Administration (Sarah · Policy Admin)" under Corporate Client Session above, then try again.`;
+        } else {
+          $('admin-result').textContent = `[ERROR] Activation failed: ${err.message}`;
+        }
       } finally {
         sampleBtn.disabled = false;
         sampleBtn.textContent = 'Activate Policy Version 2 (Apex 9 PM Escort)';
@@ -311,7 +326,11 @@ $('upload').addEventListener('submit', async event => {
     });
     $('admin-result').textContent = `[SUCCESS] Policy document activated:\n${JSON.stringify(res, null, 2)}`;
   } catch (err) {
-    $('admin-result').textContent = `[ERROR] Upload failed: ${err.message}`;
+    if (err.message && err.message.includes('Policy administrator role required')) {
+      $('admin-result').textContent = `[ACCESS DENIED] Policy administrator role required.\n\nYou are currently authenticated as an Employee. Uploading and activating policies requires the "policy_admin" role.\n\nQuick Fix: Click "Apex Administration (Sarah · Policy Admin)" under Corporate Client Session above to grant administrator access, then click Upload.`;
+    } else {
+      $('admin-result').textContent = `[ERROR] Upload failed: ${err.message}`;
+    }
   }
 });
 
@@ -321,7 +340,11 @@ $('versions').addEventListener('click', async () => {
     const list = await api('/api/v1/admin/policies/versions');
     $('admin-result').textContent = JSON.stringify(list, null, 2);
   } catch (err) {
-    $('admin-result').textContent = err.message;
+    if (err.message && err.message.includes('Policy administrator role required')) {
+      $('admin-result').textContent = `[ACCESS DENIED] Policy administrator role required.\n\nClick "Apex Administration (Sarah · Policy Admin)" above to view active policy versions.`;
+    } else {
+      $('admin-result').textContent = err.message;
+    }
   }
 });
 
@@ -330,7 +353,11 @@ $('audit').addEventListener('click', async () => {
     const events = await api('/api/v1/admin/audit?limit=20');
     $('admin-result').textContent = JSON.stringify(events, null, 2);
   } catch (err) {
-    $('admin-result').textContent = err.message;
+    if (err.message && err.message.includes('Policy administrator role required')) {
+      $('admin-result').textContent = `[ACCESS DENIED] Policy administrator role required.\n\nClick "Apex Administration (Sarah · Policy Admin)" above to view the security audit log.`;
+    } else {
+      $('admin-result').textContent = err.message;
+    }
   }
 });
 

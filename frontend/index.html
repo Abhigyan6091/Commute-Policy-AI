@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MoveInSync — Commute Policy Desk</title>
-  <link rel="stylesheet" href="/static/styles.css?v=4">
-  <script src="/static/app.js?v=4" defer></script>
+  <link rel="stylesheet" href="/static/styles.css?v=5">
+  <script src="/static/app.js?v=5" defer></script>
 </head>
 <body>
   <header>
@@ -63,6 +63,10 @@
         <summary>Policy Lifecycle & Activation</summary>
         <div class="admin-content">
           <p class="small">Upload approved policy documentation (.txt, .pdf, .docx). Document is parsed, vectorized, and atomically activated across the tenant with zero system downtime.</p>
+
+          <div id="admin-auth-status" class="role-badge warning">
+            Restricted: Employee session active. Policy uploads and activation require Administrator role. Select <strong>Apex Administration (Sarah)</strong> above to manage policies.
+          </div>
 
           <div class="sample-upload-box">
             <div class="small font-bold mb-4">Version Cutover Test:</div>
